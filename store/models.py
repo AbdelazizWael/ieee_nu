@@ -23,6 +23,7 @@ class Cart(models.Model):
     added = models.DateTimeField(auto_now_add=True)
     verified = models.BooleanField(default=False)
     compound_price = models.FloatField(default=0)
+    previous_count = models.IntegerField(default=0)
 
     def __str__(self):
         return f"CartObject({self.customer.__str__()})"

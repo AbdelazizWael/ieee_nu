@@ -29,17 +29,32 @@ class CartViewset(ModelViewSet):
 
     def perform_create(self, serializer):
         user = self.request.user
-        serializer.save(customer=user)
+        product_id = self.request.data.get('product_id')
+        product = Product.objects.get(pk=product_id)
+        serializer.save(customer=user, product=product)
 
     def create(self, request, *args, **kwargs):
-        product_id = request.data.get('product')
+        product_id = request.data.get('product_id')
         count = request.data.get('count')
         product = Product.objects.get(pk=product_id)
+
         if (int(product.count) < int(count)):
             return Response(status=status.HTTP_400_BAD_REQUEST,
                             data={"details": "Requested product count exceeds the available number."})
         else:
             return super().create(request, *args, **kwargs)
+
+    def update(self, request, *args, **kwargs):
+        cart = self.get_object()
+        previous_count = cart.previous_count
+        product = cart.product
+        count = request.data.get('count')
+
+        if (count and (int(product.count) + int(previous_count) < int(count))):
+            return Response(status=status.HTTP_400_BAD_REQUEST,
+                            data={"details": "Requested product count exceeds the available number."})
+        else:
+            return super().update(request, *args, **kwargs)
 
 
 class ListUserCart(APIView):
@@ -77,7 +92,7 @@ class VerifyPurchase(APIView):
 
     def post(self, request, *args, **kwargs):
         try:
-            prods = json.loads(request.data.get('products'))
+            prods = json.loads(request.data.get('user_list'))
             products = prods['products']
             full_price = prods['full_price']
             customer = User.objects.get(pk=request.data.get('customer_id'))
@@ -92,4 +107,3 @@ class VerifyPurchase(APIView):
         except Exception as e:
             print(e)
             return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        # TODO: Fix product Count

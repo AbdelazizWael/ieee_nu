@@ -1,4 +1,5 @@
 from rest_framework.serializers import ModelSerializer
+from rest_framework import serializers
 
 from .models import Product, Cart, Purchase
 
@@ -11,11 +12,15 @@ class ProductSerializer(ModelSerializer):
 
 
 class CartSerializer(ModelSerializer):
+    customer_id = serializers.PrimaryKeyRelatedField(
+        source='customer.pk', read_only=True)
+    product_id = serializers.PrimaryKeyRelatedField(
+        source='product.pk', read_only=True)
 
     class Meta:
         model = Cart
-        fields = '__all__'
-        read_only_fields = ['customer']
+        exclude = ['customer', 'product']
+        read_only_fields = ['compound_price']
 
 
 class _ProductCustomSerializer(ModelSerializer):
@@ -38,5 +43,5 @@ class PurchaseSerializer(ModelSerializer):
 
     class Meta:
         model = Purchase
-        fields = ['products', 'full_price', 'verified_on']
+        fields = ['id', 'products', 'full_price', 'verified_on']
         read_only_fields = fields
