@@ -6,31 +6,45 @@ Make sure you have `Python` >= 3.8, and any api testing tool like [Postman](http
 
 - Create a Python virtual environment:
 
-  `python -m venv env`
+  ``` : bash
+  python -m venv env
+  ```
 
 - Activate the virtual environment:
 
-  `.\env\Scripts\activate # if you're using Windows.`
+  ``` : bash
+  .\env\Scripts\activate # if you're using Windows.
+  ```
 
-  `source env/bin/activate # if you're using Linux or MacOs`
+  ``` : bash
+  source env/bin/activate # if you're using Linux or MacOs
+  ```
 
 - Install the libraries from `requirement.txt`:
 
-  `pip install -r requirements.txt`
+  ``` : bash
+  pip install -r requirements.txt
+  ```
 
 - Run the database migrations:
 
-  `python manage.py migrate`
+  ``` : bash
+  python manage.py migrate
+  ```
 
 - Run the development server:
 
-  `python manage.py runserver`
+  ``` : bash
+  python manage.py runserver
+  ```
 
 Now your development server will run on [http://localhost:8000/](http://localhost:8000/). Use your api testing tool to test all the api endpoints
 
 To access the admin panel, stop the server using CTRL-C and type the following command:
 
-`python manage.py createsuperuser`
+``` : bash
+python manage.py createsuperuser
+```
 
 Type your credentials and then run the development server again. Then go to [http://localhost:8000/admin/](http://localhost:8000/admin/) and use the credentials to login.
 ___
@@ -38,8 +52,12 @@ ___
 ## References:
 
 - `pk` refers to the primary key or the id of the user on the database. Two or more users can't have the same `pk`.
-- `key` in the authentication endpoints is the token associated with the user. To authenticate requests sent to the server, add the following header to the request in this exact format. <br>
-`{'Authorization': 'Token exampleKeyToken123456'}`
+- `key` in the authentication endpoints is the token associated with the user. To authenticate requests sent to the server, add the following header to the request in this exact format: <br>
+
+  ``` : JSON
+  {'Authorization': 'Token exampleKeyToken123456'}
+  ```
+
 - The API endpoints adhere to standard HTTP methods in their functions. `GET` is used to list model instances or retrieve a detailed model object. `POST` is used to create a new model instance. `PUT` and `PATCH` are used for updating existing objects, `PUT` for full updates, and `PATCH` for partial updates. A `PUT` endpoint could receive old data with partial updates and would treat them as full update, all data fields have to be present though. Finally, `DELETE` is used to delete objects from the database.
 - In the API, there are two main types of URLs, `example.com/api/model/` and `example.com/api/model/:id`. The first type accepts `GET`, `POST`, and `DELETE` requests. `GET` will list all items in a the model, while `POST` will create a new object in the model, and `DELETE` will delete *all* the objects in the model. The second type accepts `GET`, `PUT`, `PATCH`, and `DELETE`. `GET` will retrieve the object with the id of `:id`, while `PUT` and `PATCH` will update that object, and `DELETE` will delete it. This applies to any url that has the `Model` keyword alongside the requests that are allowed. Any exception to this rule will be explicitly mentioned.
 - The `Access` keyword defines user access to different urls. If a user attempted to access a route that doesn't allow it, The response will be `401 Unauthorized` or `403 Forbidden`.
