@@ -1,5 +1,29 @@
 # READ ME
 
+## Setup for the demo:
+
+Make sure you have [npm](npmjs.com), then go and setup the development server as illustrated below. Now open a new terminal and type the following commands:
+
+- Change into the demo directory:
+
+  ``` : bash
+  cd demo
+  ```
+
+- Install npm libraries:
+
+  ``` : bash
+  npm install # if it doesn't work, search for the command for Windows.
+  ```
+
+- Run the front-end server:
+
+  ``` : bash
+  npm run start
+  ```
+
+The server will run on [http://localhost:3000/](http://localhost:3000/)
+
 ## Setup for development:
 
 Make sure you have `Python` >= 3.8, and any api testing tool like [Postman](https://www.postman.com). Download this code, or clone the repository. Open terminal or cmd and type the following commands:

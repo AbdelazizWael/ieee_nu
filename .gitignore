@@ -117,4 +117,5 @@ GitHub.sublime-settings
 .history
 
 # Extra stuff
-demo/
+# demo/
+node_modules/
