@@ -1,20 +1,21 @@
 from django.urls import path
 from rest_framework.routers import DefaultRouter
 
-from .views import (ProductViewset,
-                    CartViewset,
-                    ListUserCart,
-                    VerifyPurchase,
-                    PurchaseViewset)
+from .views import *
 
 router = DefaultRouter()
-router.register(r'products', ProductViewset)
-router.register(r'cart', CartViewset, basename='cart')
-router.register(r'purchases', PurchaseViewset, basename='purchases')
+
+router.register(r'products', ProductViewset, 'product')
+router.register(r'cart', CartViewset, 'cart')
+router.register(r'orders', UserOrderViewset, 'order')
+router.register(r'history', UserHistoryViewset, 'history')
+router.register(r'all-orders', AdminOrderViewset, 'all-order')
+router.register(r'all-history', AdminHistoryViewset, 'all-history')
 
 urlpatterns = [
-    path('user-cart/', ListUserCart.as_view(), name='admin-list-cart'),
-    path('verify-purchase/', VerifyPurchase.as_view(), name='verify-purchase')
+    path('categories/', CategoriesView.as_view(), name='categories'),
+    path('place-order/', PlaceOrder.as_view(), name='place-order'),
+    path('verify-order/', VerifyOrder.as_view(), name='verify-order'),
 ]
 
 urlpatterns += router.urls

@@ -3,9 +3,9 @@
 {% load i18n %}
 
 {% block content %}{% autoescape off %}{% user_display user as user_display %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}
-You're receiving this e-mail to confirm your registration on {{ site_domain }}.
+You're receiving this e-mail to confirm your registration.
 
-To verify you're E-mail address, go to {{ activate_url }}
+To verify your E-mail address, go to {{ activate_url }}
 
 If you didn't register on {{ site_domain }}, please ignore this e-mail.
 {% endblocktrans %}{% endautoescape %}{% endblock %}

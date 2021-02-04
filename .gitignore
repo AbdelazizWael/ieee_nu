@@ -5,6 +5,7 @@
 __pycache__
 db.sqlite3
 media
+fixtures/
 
 # Backup files #
 *.bak
@@ -117,5 +118,4 @@ GitHub.sublime-settings
 .history
 
 # Extra stuff
-# demo/
 node_modules/
