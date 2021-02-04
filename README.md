@@ -2,7 +2,7 @@
 
 ## Setup for development:
 
-Make sure you have `Python` >= 3.8, and any api testing tool like [Postman](https://www.postman.com). Download this code, or clone the repository. Open terminal or cmd and type the following commands:
+Make sure you have `Python` >= 3.8, and any api testing tool like [Postman](https://www.postman.com) or [Insomnia](https://insomnia.rest/) (Make sure you install Insomnia Core, not Insomnia Designer). Download this code, or clone the repository. Open a terminal or cmd, go to the project directory, and type the following commands:
 
 - Create a Python virtual environment:
 
@@ -38,7 +38,7 @@ Make sure you have `Python` >= 3.8, and any api testing tool like [Postman](http
   python manage.py runserver
   ```
 
-Now your development server will run on [http://localhost:8000/](http://localhost:8000/). Use your api testing tool to test all the api endpoints
+Now your development server will run on [http://localhost:8000/](http://localhost:8000/). Use your api testing tool to test all the api endpoints.
 
 To access the admin panel, stop the server using CTRL-C and type the following command:
 
@@ -58,9 +58,23 @@ ___
   {'Authorization': 'Token exampleKeyToken123456'}
   ```
 
-- The API endpoints adhere to standard HTTP methods in their functions. `GET` is used to list model instances or retrieve a detailed model object. `POST` is used to create a new model instance. `PUT` and `PATCH` are used for updating existing objects, `PUT` for full updates, and `PATCH` for partial updates. A `PUT` endpoint could receive old data with partial updates and would treat them as full update, all data fields have to be present though. Finally, `DELETE` is used to delete objects from the database.
-- In the API, there are two main types of URLs, `example.com/api/model/` and `example.com/api/model/:id`. The first type accepts `GET`, `POST`, and `DELETE` requests. `GET` will list all items in a the model, while `POST` will create a new object in the model, and `DELETE` will delete *all* the objects in the model. The second type accepts `GET`, `PUT`, `PATCH`, and `DELETE`. `GET` will retrieve the object with the id of `:id`, while `PUT` and `PATCH` will update that object, and `DELETE` will delete it. This applies to any url that has the `Model` keyword alongside the requests that are allowed. Any exception to this rule will be explicitly mentioned.
+- The API endpoints adhere to standard HTTP methods in their functions. `GET` is used to list model instances or retrieve a detailed model object. `POST` is used to create a new model instance. `PUT` and `PATCH` are used for updating existing objects, `PUT` for full updates, and `PATCH` for partial updates. A `PUT` endpoint could receive old data with partial updates and would treat them as a full update, all data fields have to be present though. Finally, `DELETE` is used to delete objects from the database.
+- In the API, there are two main types of URLs, `example.com/api/model/` and `example.com/api/model/:id`. The first type can accept `GET`, `POST`, or `DELETE` requests. `GET` will list all items in the model, while `POST` will create a new object in the model, and `DELETE` will delete *all* the objects in the model. The second type can accept `GET`, `PUT`, `PATCH`, or `DELETE`. `GET` will retrieve the object with the id of `:id`, while `PUT` and `PATCH` will update that object, and `DELETE` will delete it. This applies to any url that has the `Model` keyword alongside the requests that are allowed. Any exception to this rule will be explicitly mentioned.
 - The `Access` keyword defines user access to different urls. If a user attempted to access a route that doesn't allow it, The response will be `401 Unauthorized` or `403 Forbidden`.
+- All api endpoints that have an associated `Model` is subject to pagination. This means that requesting data from the urls that list objects (i.e. `example.com/api/model/`) will give a response with the following format:
+
+  ``` : JSON
+  {
+    "count":  // Number of pages.
+    "next":  // A link to the next page.
+    "previous":  // A link to the previous page.
+    "results": [
+      // The requested data.
+    ]
+  }
+  ```
+
+  The return values mentioned in the api documentations are all inside the `results` field.
 
 ___
 
@@ -107,14 +121,26 @@ ___
 - /auth/user/ (GET, PUT, PATCH) `[Access: User]`
   >Returns `pk`, `email`, `first_name`, `last_name` of the logged in user.
 
+- /auth/users/ (GET) `[Model: User]` `[Access: Staff]`
+  > Returns all the registered users.
+
 <br>
 
 ## Store endpoints:
 
+- store/categories/ (GET) `[Access: Anyone]`
+  > Returns a list of categories.
+
 - store/products/ (GET) `[Model: Product]` `[Access: Anyone]`
   > Returns a list of all the products. See the details below.
 
-- store/products/:id (GET) `[Model: Product]` `[Access: Anyone]`
+  - Products can be searched using the following query parameters:
+    - `q`: Can only be one parameter to search the name of the product. For example: `store/products/?q=Nokia`.
+    - `category`: Can be many parameters to filter by categories. For example: `store/products/?category=Arduino&category=Sensor`.
+  
+    Both parameters can be used together.
+
+- store/products/:id/ (GET) `[Model: Product]` `[Access: Anyone]`
   > Returns `id`, `name`, `description`, `price`, `image`, and `count`.
   
   > The value of `image` is a link to the actual image file.
@@ -124,28 +150,43 @@ ___
   - count
   > Returns a list of all the cart items. See the details below.
 
-- store/cart/:id (GET, PUT, PATCH, DELETE) `[Model: Cart]` `[Access: User]`
-  - product_id
+- store/cart/:id/ (GET, PUT, PATCH, DELETE) `[Model: Cart]` `[Access: User]`
   - count
-  - verified
-  > Returns `id`, `customer_id`, `product_id`, `count`, `added`, `verified`, `compound_price`.
+  > Returns `id`, `product`, `count`, `added`, `compound_price`.
 
-  > The `verified` field indicates that the cart object has been saved by the user and payment is pending. For efficiency reasons, each objects has to be verified manually. `added` is a read-only timestamp.
+  > `product` is a subset of the Product model. `added` is a read-only timestamp.
 
-- store/user-cart/?pk=`:user_id` (GET) `[Access: Admin]`
-  > Returns `products`, `full_price`.
+- store/orders/ (GET) `[Model: Order]` `[Access: User]`
+  > Returns a list of all user orders. See below for details.
 
-  > `products` is a list of all the cart objects that the user with `:user_id` has verified (and intends to buy). This url is made to list the products for admins who are responsible to sell those products to the user. The url ideally will be sent via email as a qr-code.
+- store/orders/:id/ (GET) `[Model: Order]` `[Access: User]`
+  > Returns `carts`, `full_price`, `placed`, `delivery_time`.
 
-- store/verify-purchase/ (POST) `[Model: Purchase]` `[Access: Admin]`
-  - user_list
-  - customer_id
-  > `user_list` is *all* the data from `store/user-list/` with no changes (copy and paste). `customer_id` can be obtained from the query parameter in `store/user-list/`.
+  > `carts` is a list of all the carts in the order, `placed` is a timestamp for the order, and `delivery_time` is when the user have to go and get the order. The order expires after 7 days of `delivery_time`.
 
-- store/purchases/ (GET) `[Model: Purchase]` `[Access: User]`
-  > Returns a list of all the user purchase history. See the details below. 
+- store/place-order/ (POST) `[Access: User]`
+  > A url to place the order of a user. The cart objects will be locked and linked to an order object. Returns an object with the same fields as `store/orders/:id/`.
 
-- store/purchases/:id (GET) `[Model: Purchase]` `[Access: User]`
-  > Returns `id`, `products`, `full_price`, `verified_on`.
+- store/history/ (GET) `[Model: History]` `[Access: User]`
+  > Returns a list of all user history. See below for details.
 
-  > The data is the same as inputed using `store/verify-purchase/` with `verified_on` as the timestamp of transaction verification.
+- store/history/:id/ (GET) `[Model: History]` `[Access: User]`
+  > Returns `products`, `full_price`, `verified_on`.
+
+  > `products` is a json string with the products information, and `verified_on` is timestamp of order delivery.
+
+- store/verify-order/ (POST) `[Access: Staff]`
+  - order_id
+  > Verifies that the order has been delivered and creates a history record.
+
+- store/all-orders/ (GET) `[Model: Order]` `[Access: Staff]`
+  > Returns the orders of all users. See below for details.
+
+- store/all-orders/:id/ (GET) `[Model: Order]` `[Access: Staff]`
+  > Returns `carts`, `full_price`, `customer`, `placed`, `delivery_time`.
+
+- store/all-history/ (GET) `[Model: History]` `[Access: Staff]`
+  > Returns the history of all users. See below for details.
+
+- store/all-history/:id/ (GET) `[Model: History]` `[Access: Staff]`
+  > Returns `products`, `full_price`, `customer`, `verified_on`, `verified_by`.

@@ -1,7 +1,11 @@
-from django.urls import include, path
 from dj_rest_auth.registration.views import VerifyEmailView
+from django.urls import include, path
+from rest_framework.routers import DefaultRouter
 
-from .views import empty_view
+from .views import UserDetails, empty_view
+
+router = DefaultRouter()
+router.register(r'users', UserDetails)
 
 urlpatterns = [
     path('', include('dj_rest_auth.urls')),
@@ -12,3 +16,5 @@ urlpatterns = [
     path('password-reset/<uidb64>/<token>/',
          empty_view, name='password_reset_confirm'),
 ]
+
+urlpatterns += router.urls
