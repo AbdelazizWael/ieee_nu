@@ -45,8 +45,8 @@ class Product(models.Model):
 
 class Cart(models.Model):
     """
-    A model to store carts. Carts are objects ported from products and used
-    to store the products for the user, until he formally places the order.
+    A model to store carts. Carts are objects subset-ed from products and used
+    to store the products for the user, until he/she formally places the order.
     """
     product = models.ForeignKey('Product', on_delete=models.PROTECT)
     customer = models.ForeignKey(

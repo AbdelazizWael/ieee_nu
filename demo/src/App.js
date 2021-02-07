@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import Main from './components/Main';
-import './App.css';
+import Main from './layout/Main';
+import './css/style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import ConfigureStore from './store/configureStore';
+import ConfigureStore from './redux/configureStore';
 
 const store = ConfigureStore();
 

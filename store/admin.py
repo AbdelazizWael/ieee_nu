@@ -10,7 +10,7 @@ admin.site.register(Category)
 class ProductAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {'fields': ('name', 'description', ('price', 'count'),
-                           'categories', 'image', 'delivery_time')}),
+                           'categories', 'image', 'delivery_duration')}),
         (_('Meta Data'), {'fields': ('created',)}),
     )
     readonly_fields = ('created',)

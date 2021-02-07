@@ -83,7 +83,7 @@ ___
   ```
 
 - The API endpoints adhere to standard HTTP methods in their functions. `GET` is used to list model instances or retrieve a detailed model object. `POST` is used to create a new model instance. `PUT` and `PATCH` are used for updating existing objects, `PUT` for full updates, and `PATCH` for partial updates. A `PUT` endpoint could receive old data with partial updates and would treat them as a full update, all data fields have to be present though. Finally, `DELETE` is used to delete objects from the database.
-- In the API, there are two main types of URLs, `example.com/api/model/` and `example.com/api/model/:id`. The first type can accept `GET`, `POST`, or `DELETE` requests. `GET` will list all items in the model, while `POST` will create a new object in the model, and `DELETE` will delete *all* the objects in the model. The second type can accept `GET`, `PUT`, `PATCH`, or `DELETE`. `GET` will retrieve the object with the id of `:id`, while `PUT` and `PATCH` will update that object, and `DELETE` will delete it. This applies to any url that has the `Model` keyword alongside the requests that are allowed. Any exception to this rule will be explicitly mentioned.
+- In the API, there are two main types of URLs, `example.com/api/model/` and `example.com/api/model/:id`. The first type can accept `GET` or `POST` requests. `GET` will list all items in the model, while `POST` will create a new object in the model. The second type can accept `GET`, `PUT`, `PATCH`, or `DELETE`. `GET` will retrieve the object with the id of `:id`, while `PUT` and `PATCH` will update that object, and `DELETE` will delete it. This applies to any url that has the `Model` keyword alongside the requests that are allowed. Any exception to this rule will be explicitly mentioned.
 - The `Access` keyword defines user access to different urls. If a user attempted to access a route that doesn't allow it, The response will be `401 Unauthorized` or `403 Forbidden`.
 - All api endpoints that have an associated `Model` is subject to pagination. This means that requesting data from the urls that list objects (i.e. `example.com/api/model/`) will give a response with the following format:
 
@@ -169,12 +169,12 @@ ___
   
   > The value of `image` is a link to the actual image file.
 
-- store/cart/ (GET, POST, DELETE) `[Model: Cart]` `[Access: User]`
+- store/carts/ (GET, POST) `[Model: Cart]` `[Access: User]`
   - product_id
   - count
   > Returns a list of all the cart items. See the details below.
 
-- store/cart/:id/ (GET, PUT, PATCH, DELETE) `[Model: Cart]` `[Access: User]`
+- store/carts/:id/ (GET, PUT, PATCH, DELETE) `[Model: Cart]` `[Access: User]`
   - count
   > Returns `id`, `product`, `count`, `added`, `compound_price`.
 

@@ -43,17 +43,23 @@ class ProductViewset(ReadOnlyModelViewSet):
     permission_classes = [AllowAny]
 
     def list(self, request, *args, **kwargs):
+        """
+        Filter results based on search parameters.
+        """
         queryset = self.filter_queryset(self.get_queryset())
 
+        # Search by name queries.
         q = request.query_params.get('q', None)
         if q:
             queryset = queryset.filter(name__icontains=q)
 
+        # Filter by categories.
         cats = request.query_params.getlist('category', None)
         if cats:
             for cat in cats:
                 queryset = queryset.filter(categories__name__iexact=cat)
 
+        # Paginate.
         page = self.paginate_queryset(queryset)
         if page is not None:
             serializer = self.get_serializer(page, many=True)
@@ -84,34 +90,49 @@ class CartViewset(ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         """
-        Check before creating if the count of the cart is not bigger than the product count.
+        Validate created carts.
         """
         product_id = request.data.get('product_id')
         count = request.data.get('count')
         product = Product.objects.get(pk=product_id)
 
+        # Check if the count is bigger than the product count.
         if (int(product.count) < int(count)):
             return Response(
                 status=status.HTTP_400_BAD_REQUEST,
                 data={"detail": "Requested product count exceeds the available number."}
             )
-        else:
-            return super().create(request, *args, **kwargs)
+
+        # Check if the user has a cart with this product. If so, add the updates to that cart.
+        # This prevents duplicate carts.
+        user_carts = Cart.objects.filter(customer=request.user, order=None)
+        for cart in user_carts:
+            if cart.product == product:
+                inst = self.get_serializer(cart)
+                return Response(
+                    data={"cart": inst.data},
+                    status=status.HTTP_303_SEE_OTHER
+                )
+
+        return super().create(request, *args, **kwargs)
 
     def update(self, request, *args, **kwargs):
         """
-        Check before updating if the count of the cart is not bigger than the product count.
+        Validate updated carts.
         """
         cart = self.get_object()
         previous_count = cart.previous_count
         product = cart.product
         count = request.data.get('count')
 
+        #  Check if the updated count is bigger than the product count.
         if (count and (int(product.count) + int(previous_count) < int(count))):
-            return Response(status=status.HTTP_400_BAD_REQUEST,
-                            data={"detail": "Requested product count exceeds the available number."})
-        else:
-            return super().update(request, *args, **kwargs)
+            return Response(
+                status=status.HTTP_400_BAD_REQUEST,
+                data={"detail": "Requested product count exceeds the available number."}
+            )
+
+        return super().update(request, *args, **kwargs)
 
 
 class UserOrderViewset(ReadOnlyModelViewSet):
@@ -242,3 +263,17 @@ class VerifyOrder(APIView):
         # Delete order.
         order.delete()
         return Response(status=status.HTTP_202_ACCEPTED)
+
+
+class DeleteCarts(APIView):
+    """
+    Delete all the cart items on logout.
+    """
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request, *args, **kwargs):
+        carts = Cart.objects.filter(customer=request.user, order=None)
+        if carts:
+            carts.delete()
+
+        return Response(status=status.HTTP_204_NO_CONTENT)
