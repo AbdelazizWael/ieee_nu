@@ -1,0 +1,10 @@
+Hello, {{ full_name }}.
+
+This email is sent to inform you that your order has been placed successfully on our site.
+
+Your order id is: {{ order_id }}
+
+Please head over to Nile University on {{ delivery_date }}, any time from 8 AM to 6 PM, to claim your order. Don't forget to have your order id at hand.
+Your order will automatically expire after 7 days from {{ delivery_date }}.
+
+Thank you for using our website!

@@ -281,6 +281,9 @@ class CancelOrder(APIView):
         for cart in carts:
             cart.send_order_canceled()
 
+        # Send confirmation mail.
+        send_order_cancelation_mail(request.user, order)
+
         order.delete()
 
         return Response(status=status.HTTP_204_NO_CONTENT)

@@ -1,0 +1,5 @@
+Hello, {{ full_name }}.
+
+This email is sent to inform you that your order with id {{ order_id }} has been canceled.
+
+Thank you for using our website!
