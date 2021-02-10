@@ -9,12 +9,12 @@ admin.site.register(Category)
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     fieldsets = (
-        (None, {'fields': ('name', 'description', ('price', 'count'),
+        (None, {'fields': ('name', 'description', 'price',
                            'categories', 'image', 'delivery_duration')}),
         (_('Meta Data'), {'fields': ('created',)}),
     )
     readonly_fields = ('created',)
-    list_display = ('name', 'price', 'count')
+    list_display = ('name', 'price')
     search_fields = ('name', )
     ordering = ('name', )
 
@@ -53,3 +53,15 @@ class HistoryAdmin(admin.ModelAdmin):
     )
     search_fields = ('customer', )
     ordering = ('customer', )
+
+
+@admin.register(Sales)
+class SalesAdmin(admin.ModelAdmin):
+    fieldsets = (
+        (None, {'fields': ('product_name',
+                           ('total_count', 'stocked'), ('on_hold', 'ordered', 'sold'))}),
+    )
+    list_display = ('product_name', 'total_count',
+                    'stocked', 'on_hold', 'ordered', 'sold')
+    readonly_fields = ('on_hold', 'ordered', 'sold', 'product_name')
+    search_field = ('product_name', )

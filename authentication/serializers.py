@@ -2,7 +2,7 @@ from dj_rest_auth.registration.serializers import RegisterSerializer
 from dj_rest_auth.serializers import PasswordResetSerializer
 from rest_framework import serializers
 
-from .models import User
+from .models import *
 
 
 class CustomPasswordResetSerializer(PasswordResetSerializer):
@@ -13,8 +13,6 @@ class CustomPasswordResetSerializer(PasswordResetSerializer):
 
 
 class CustomRegisterSerializer(RegisterSerializer):
-    first_name = serializers.CharField()
-    last_name = serializers.CharField()
 
     def get_cleaned_data(self):
         super(CustomRegisterSerializer, self).get_cleaned_data()
@@ -22,13 +20,14 @@ class CustomRegisterSerializer(RegisterSerializer):
             'password1': self.validated_data.get('password1', ''),
             'password2': self.validated_data.get('password2', ''),
             'email': self.validated_data.get('email', ''),
-            'first_name': self.validated_data.get('first_name', ''),
-            'last_name': self.validated_data.get('last_name', '')
         }
 
 
-class UserSerializer(serializers.ModelSerializer):
+class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = User
-        fields = ['id', 'email', 'full_name', 'is_staff', 'is_superuser']
+        model = Profile
+        exclude = ['user']
+        read_only_fields = ['email', 'full_name', 'added', 'last_modified']
+        extra_kwargs = {'first_name': {'write_only': True},
+                        'last_name': {'write_only': True}}

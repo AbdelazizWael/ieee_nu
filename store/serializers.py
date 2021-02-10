@@ -1,9 +1,7 @@
-from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
+from authentication.models import Profile
 from .models import *
-
-User = get_user_model()
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -35,7 +33,6 @@ class CartSerializer(serializers.ModelSerializer):
         model = Cart
         exclude = ['customer', 'previous_count', 'order']
         read_only_fields = ['compound_price']
-        depth = 1
 
 
 class _CartCustomSerializer(serializers.ModelSerializer):
@@ -61,16 +58,17 @@ class HistorySerializer(serializers.ModelSerializer):
         exclude = ['customer', 'verified_by']
 
 
-class _UserCustomSerializer(serializers.ModelSerializer):
+class _ProfileCustomSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = User
-        fields = ['email', 'full_name']
+        model = Profile
+        fields = ['email', 'full_name', 'phone_number']
 
 
 class AdminOrderSerializer(serializers.ModelSerializer):
     carts = _CartCustomSerializer(many=True, read_only=True)
-    customer = _UserCustomSerializer(read_only=True)
+    customer = _ProfileCustomSerializer(
+        read_only=True, source='customer.profile')
 
     class Meta:
         model = Order
@@ -78,8 +76,10 @@ class AdminOrderSerializer(serializers.ModelSerializer):
 
 
 class AdminHistorySerializer(serializers.ModelSerializer):
-    customer = _UserCustomSerializer(read_only=True)
-    verified_by = _UserCustomSerializer(read_only=True)
+    customer = _ProfileCustomSerializer(
+        read_only=True, source='customer.profile')
+    verified_by = _ProfileCustomSerializer(
+        read_only=True, source='verified_by.profile')
 
     class Meta:
         model = History

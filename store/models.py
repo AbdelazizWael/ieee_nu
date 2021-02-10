@@ -3,6 +3,12 @@ from datetime import timedelta
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.dispatch import Signal
+
+
+order_verified = Signal()
+cart_removed = Signal()
+order_canceled = Signal()
 
 
 def get_sentinel_user():
@@ -32,7 +38,6 @@ class Product(models.Model):
     """
     name = models.CharField(max_length=256)
     description = models.TextField()
-    count = models.IntegerField()
     price = models.FloatField()
     image = models.ImageField(blank=True, null=True)
     categories = models.ManyToManyField('Category', related_name='products')
@@ -61,6 +66,15 @@ class Cart(models.Model):
 
     def __str__(self):
         return f"CartObject({self.customer.__str__()}: {self.product.name})"
+
+    def send_cart_removed(self):
+        cart_removed.send(sender=self.__class__, instance=self)
+
+    def send_order_verified(self):
+        order_verified.send(sender=self.__class__, instance=self)
+
+    def send_order_canceled(self):
+        order_canceled.send(sender=self.__class__, instance=self)
 
 
 class Order(models.Model):
@@ -95,3 +109,23 @@ class History(models.Model):
 
     class Meta:
         verbose_name_plural = 'Histories'
+
+
+class Sales(models.Model):
+    """
+    A model to store the sales data of the products.
+    """
+    product = models.OneToOneField(
+        'Product', on_delete=models.SET_NULL, related_name='sales', null=True)
+    product_name = models.CharField(max_length=256, blank=True)
+    total_count = models.IntegerField(default=0)
+    stocked = models.IntegerField(default=0)
+    on_hold = models.IntegerField(default=0)
+    ordered = models.IntegerField(default=0)
+    sold = models.IntegerField(default=0)
+
+    class Meta:
+        verbose_name_plural = 'Sales'
+
+    def __str__(self):
+        return f"Sales(for: {self.product_name})"

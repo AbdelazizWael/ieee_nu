@@ -20,6 +20,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 DEFAULT_APPS = [
+    'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -155,6 +156,8 @@ AUTHENTICATION_BACKENDS = (
 )
 
 SITE_ID = 1
+
+GRAPPELLI_ADMIN_TITLE = 'IEEE NU'
 
 CORS_ALLOW_ALL_ORIGINS = True
 # CORS_ALLOWED_ORIGINS = []

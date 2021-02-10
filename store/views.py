@@ -1,7 +1,3 @@
-import json
-
-from django.contrib.auth import get_user_model
-from django.db.models import Q
 from django.utils import timezone
 from rest_framework import status
 from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
@@ -66,7 +62,10 @@ class ProductViewset(ReadOnlyModelViewSet):
             return self.get_paginated_response(serializer.data)
 
         serializer = self.get_serializer(queryset, many=True)
-        return Response(serializer.data)
+        return Response(
+            serializer.data,
+            status=status.HTTP_200_OK
+        )
 
 
 class CartViewset(ModelViewSet):
@@ -93,15 +92,7 @@ class CartViewset(ModelViewSet):
         Validate created carts.
         """
         product_id = request.data.get('product_id')
-        count = request.data.get('count')
         product = Product.objects.get(pk=product_id)
-
-        # Check if the count is bigger than the product count.
-        if (int(product.count) < int(count)):
-            return Response(
-                status=status.HTTP_400_BAD_REQUEST,
-                data={"detail": "Requested product count exceeds the available number."}
-            )
 
         # Check if the user has a cart with this product. If so, add the updates to that cart.
         # This prevents duplicate carts.
@@ -116,23 +107,10 @@ class CartViewset(ModelViewSet):
 
         return super().create(request, *args, **kwargs)
 
-    def update(self, request, *args, **kwargs):
-        """
-        Validate updated carts.
-        """
+    def destroy(self, request, *args, **kwargs):
         cart = self.get_object()
-        previous_count = cart.previous_count
-        product = cart.product
-        count = request.data.get('count')
-
-        #  Check if the updated count is bigger than the product count.
-        if (count and (int(product.count) + int(previous_count) < int(count))):
-            return Response(
-                status=status.HTTP_400_BAD_REQUEST,
-                data={"detail": "Requested product count exceeds the available number."}
-            )
-
-        return super().update(request, *args, **kwargs)
+        cart.send_cart_removed()
+        return super().destroy(request, *args, **kwargs)
 
 
 class UserOrderViewset(ReadOnlyModelViewSet):
@@ -236,7 +214,13 @@ class VerifyOrder(APIView):
 
     def post(self, request, *args, **kwargs):
         order_id = request.data.get('order_id')
-        order = Order.objects.get(pk=order_id)
+        try:
+            order = Order.objects.get(pk=order_id)
+        except Exception:
+            return Response(
+                data={'detail': 'No such order exists!'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
         # Extract products.
         products = []
@@ -248,6 +232,7 @@ class VerifyOrder(APIView):
                 'compound_price': cart.compound_price
             }
             products.append(prod)
+            cart.send_order_verified()
 
         history = History(
             products=products,
@@ -262,6 +247,7 @@ class VerifyOrder(APIView):
 
         # Delete order.
         order.delete()
+
         return Response(status=status.HTTP_202_ACCEPTED)
 
 
@@ -273,7 +259,28 @@ class DeleteCarts(APIView):
 
     def delete(self, request, *args, **kwargs):
         carts = Cart.objects.filter(customer=request.user, order=None)
-        if carts:
-            carts.delete()
+        for cart in carts:
+            cart.send_cart_removed()
+            cart.delete()
+
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class CancelOrder(APIView):
+    """
+    Cancel an order.
+    """
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, *args, **kwargs):
+        order_id = request.data.get('order_id')
+        order = Order.objects.get(pk=order_id)
+
+        # Get all the carts and send the order_canceled signal
+        carts = order.carts.all()
+        for cart in carts:
+            cart.send_order_canceled()
+
+        order.delete()
 
         return Response(status=status.HTTP_204_NO_CONTENT)
