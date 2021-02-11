@@ -26,7 +26,7 @@ class Staff extends React.Component {
 
     handleSubmit = (event) => {
         this.setState({ order: null, order_id: '', error: '' })
-        axios.get(basUrl + `store/all-orders/${this.state.id}`, header())
+        axios.get(basUrl + `store/all-orders/${this.state.id}/`, header())
             .then(res => {
                 this.setState({ order: res.data, order_id: res.data.id });
             })
