@@ -1,11 +1,11 @@
-from mail.senders import TemplatedTextEmail
+from mail.senders import TemplatedEmail
 import datetime
 
 
 def send_order_confirmation_mail(user, order):
     subject = '[IEEE NU] Order Placed'
     to = [user.profile.email]
-    template = 'order_confirmation.txt'
+    template = 'order_confirmation'
     delivery_date = str(datetime.datetime.date(order.delivery_time))
     context = {
         'full_name': user.profile.full_name,
@@ -13,21 +13,21 @@ def send_order_confirmation_mail(user, order):
         'delivery_date': delivery_date
     }
 
-    msg = TemplatedTextEmail()
+    msg = TemplatedEmail()
     msg.send(subject, to, template, context)
 
 
 def send_order_cancelation_mail(user, order):
     subject = '[IEEE NU] Order Canceled'
     to = [user.profile.email]
-    template = 'order_cancelation.txt'
+    template = 'order_cancelation'
     delivery_date = str(datetime.datetime.date(order.delivery_time))
     context = {
         'full_name': user.profile.full_name,
         'order_id': order.id,
     }
 
-    msg = TemplatedTextEmail()
+    msg = TemplatedEmail()
     msg.send(subject, to, template, context)
 
 

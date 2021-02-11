@@ -282,7 +282,7 @@ class CancelOrder(APIView):
             cart.send_order_canceled()
 
         # Send confirmation mail.
-        send_order_cancelation_mail(request.user, order)
+        send_order_cancelation_mail(order.customer, order)
 
         order.delete()
 
