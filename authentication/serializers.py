@@ -22,6 +22,9 @@ class CustomRegisterSerializer(RegisterSerializer):
             'email': self.validated_data.get('email', ''),
         }
 
+    def custom_signup(self, request, user):
+        user.send_user_signed_up_signal(request)
+
 
 class ProfileSerializer(serializers.ModelSerializer):
     is_staff = serializers.CharField(source='user.is_staff', read_only=True)

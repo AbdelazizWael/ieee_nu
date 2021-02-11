@@ -1,6 +1,5 @@
 from django.db.models import signals
-from django.dispatch import receiver
-from allauth.account.signals import user_signed_up
+from django.dispatch import receiver, Signal
 
 from .models import *
 from .serializers import *
@@ -9,16 +8,7 @@ from .serializers import *
 @receiver(user_signed_up)
 def add_profile(request, user, *args, **kwargs):
     profile = Profile(user=user, email=user.email)
-
-    try:
-        data = request._request.data
-    except Exception as e:
-        print(e)
-        data = request.POST
-
-    print(data)
-
-    inst = ProfileSerializer(instance=profile, data=data)
+    inst = ProfileSerializer(instance=profile, data=request.data)
     inst.is_valid()
     inst.save()
 

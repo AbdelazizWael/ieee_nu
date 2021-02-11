@@ -5,6 +5,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.validators import RegexValidator
 from django.dispatch import Signal
 
+user_signed_up = Signal()
+
 
 class CustomUserManager(BaseUserManager):
     """
@@ -50,6 +52,9 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.email
+
+    def send_user_signed_up_signal(self, request):
+        user_signed_up.send(sender=self.__class__, request=request, user=self)
 
 
 class Profile(models.Model):
