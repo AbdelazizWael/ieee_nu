@@ -24,6 +24,7 @@ class CustomRegisterSerializer(RegisterSerializer):
 
 
 class ProfileSerializer(serializers.ModelSerializer):
+    is_staff = serializers.CharField(source='user.is_staff', read_only=True)
 
     class Meta:
         model = Profile

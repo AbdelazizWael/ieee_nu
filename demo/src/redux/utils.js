@@ -1,6 +1,6 @@
 export const header = () => ({
     headers: {
-        'Authorization': 'Token ' + localStorage.getItem('token')
+        'Authorization': 'Token ' + sessionStorage.getItem('token')
     }
 });
 

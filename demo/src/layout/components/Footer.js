@@ -16,7 +16,7 @@ const Footer = (props) => {
                             {
                                 props.authState.user
                                     ?
-                                    props.authState.user.isStaff === 'true'
+                                    props.authState.user.isStaff === 'True'
                                         ?
                                         <li><a href="/staff">Staff Panel</a></li>
                                         :

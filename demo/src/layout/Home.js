@@ -19,10 +19,7 @@ class Home extends Component {
         const products = this.props.productState.products.results;
 
         const add = (product) => (event) => {
-            if (product.count > 0) {
-                this.props.addCart({ product_id: product.id, count: 1 });
-                product.count--;
-            }
+            this.props.addCart({ product_id: product.id, count: 1 });
             event.preventDefault();
         }
 

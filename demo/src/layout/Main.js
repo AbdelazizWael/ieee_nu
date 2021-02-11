@@ -39,7 +39,7 @@ const mapDispatchToProps = (dispatch) => ({
     getCarts: () => { dispatch(cartsActions.getCarts()); },
     addCart: (cart) => { dispatch(cartsActions.addCart(cart)); },
     updateCart: (cart, count) => { dispatch(cartsActions.updateCart(cart, count)); },
-    deleteCart: (cart) => { dispatch(cartsActions.deleteCart(cart)) }
+    deleteCart: (cart) => { dispatch(cartsActions.deleteCart(cart)); },
 });
 
 class Main extends Component {
@@ -68,6 +68,7 @@ class Main extends Component {
         const allProps = {
             ...this.props,
             pushHome: pushHome,
+            deleteCarts: cartsActions.deleteCarts,
         }
 
         const mustAuth = (component) => {
@@ -79,7 +80,7 @@ class Main extends Component {
 
         }
         const mustStaff = (component) => {
-            if (this.props.authState.isAuthenticated && this.props.authState.user.isStaff === 'true') {
+            if (this.props.authState.isAuthenticated && this.props.authState.user.isStaff === 'True') {
                 return component;
             } else {
                 return <Redirect to={{ pathname: "/login", state: { message: "You must be a staff user!" } }} />;

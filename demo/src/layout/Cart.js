@@ -75,10 +75,7 @@ class Cart extends React.Component {
     }
 
     removeCarts = () => {
-        const carts = this.props.cartState.carts.results;
-        carts.forEach(cart => {
-            this.props.deleteCart(cart.id);
-        });
+        this.props.deleteCarts();
     }
 
     render() {

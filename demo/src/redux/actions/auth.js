@@ -42,36 +42,25 @@ export const login = (credentials) => (dispatch) => {
     return axios.post(baseUrl + prefix + 'login/', credentials)
         .then(res => {
             const token = res.data.key;
-            localStorage.setItem('token', token);
+            sessionStorage.setItem('token', token);
             getUserData();
-            isStaff();
             dispatch(authSuccess(token));
         })
         .catch(error => dispatch(authFailed(error.message)));
 }
 
 export const logout = () => (dispatch) => {
-    localStorage.clear();
+    sessionStorage.clear();
     dispatch(authLogout());
     return axios.post(baseUrl + prefix + 'logout/', {}, header());
 }
 
 const getUserData = () => {
-    return axios.get(baseUrl + prefix + 'user/', header())
+    return axios.get(baseUrl + prefix + 'profile/', header())
         .then(res => {
             const data = res.data;
-            localStorage.setItem('email', data.email);
-            const full_name = data.first_name + ' ' + data.last_name
-            localStorage.setItem('full_name', full_name);
-        })
-}
-
-const isStaff = () => {
-    return axios.get(baseUrl + prefix + 'is-staff/', header())
-        .then(res => {
-            localStorage.setItem('isStaff', true);
-        })
-        .catch(error => {
-            localStorage.setItem('isStaff', false);
+            sessionStorage.setItem('email', data.email);
+            sessionStorage.setItem('full_name', data.full_name);
+            sessionStorage.setItem('isStaff', data.is_staff);
         })
 }

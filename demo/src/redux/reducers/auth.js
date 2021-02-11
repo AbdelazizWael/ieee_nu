@@ -1,13 +1,13 @@
 import * as actionTypes from '../actionTypes';
 
 const setState = () => {
-    const token = localStorage.getItem('token') || null;
+    const token = sessionStorage.getItem('token') || null;
     const isAuthenticated = token !== null;
     var user = null;
     user = {
-        email: localStorage.getItem('email'),
-        full_name: localStorage.getItem('full_name'),
-        isStaff: localStorage.getItem('isStaff'),
+        email: sessionStorage.getItem('email'),
+        full_name: sessionStorage.getItem('full_name'),
+        isStaff: sessionStorage.getItem('isStaff'),
     };
 
     const state = {

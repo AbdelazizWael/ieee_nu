@@ -9,7 +9,16 @@ from .serializers import *
 @receiver(user_signed_up)
 def add_profile(request, user, *args, **kwargs):
     profile = Profile(user=user, email=user.email)
-    inst = ProfileSerializer(instance=profile, data=request.POST)
+
+    try:
+        data = request._request.data
+    except Exception as e:
+        print(e)
+        data = request.POST
+
+    print(data)
+
+    inst = ProfileSerializer(instance=profile, data=data)
     inst.is_valid()
     inst.save()
 

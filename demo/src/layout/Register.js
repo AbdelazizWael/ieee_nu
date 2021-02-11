@@ -12,7 +12,8 @@ class Login extends React.Component {
             first_name: '',
             last_name: '',
             password1: '',
-            password2: ''
+            password2: '',
+            phone_number: '',
         }
     }
 
@@ -66,12 +67,6 @@ class Login extends React.Component {
 
                             <Strap.Form onSubmit={this.handleSubmit}>
                                 <Strap.FormGroup row>
-                                    <Strap.Label for="email" sm="3">Email: </Strap.Label>
-                                    <Strap.Col sm="9">
-                                        <Strap.Input type="email" name="email" id="email" placeholder="Email" value={this.state.email} onChange={this.handleChange} />
-                                    </Strap.Col>
-                                </Strap.FormGroup>
-                                <Strap.FormGroup row>
                                     <Strap.Label for="first_name" sm="3">First Name: </Strap.Label>
                                     <Strap.Col sm="9">
                                         <Strap.Input type="text" name="first_name" id="first_name" placeholder="First Name" value={this.state.first_name} onChange={this.handleChange} />
@@ -81,6 +76,18 @@ class Login extends React.Component {
                                     <Strap.Label for="last_name" sm="3">Last Name: </Strap.Label>
                                     <Strap.Col sm="9">
                                         <Strap.Input type="text" name="last_name" id="last_name" placeholder="Last Name" value={this.state.last_name} onChange={this.handleChange} />
+                                    </Strap.Col>
+                                </Strap.FormGroup>
+                                <Strap.FormGroup row>
+                                    <Strap.Label for="phone_number" sm="3">Phone Number: </Strap.Label>
+                                    <Strap.Col sm="9">
+                                        <Strap.Input type="text" name="phone_number" id="phone_number" placeholder="e.g: +2012345678" value={this.state.phone_number} onChange={this.handleChange} />
+                                    </Strap.Col>
+                                </Strap.FormGroup>
+                                <Strap.FormGroup row>
+                                    <Strap.Label for="email" sm="3">Email: </Strap.Label>
+                                    <Strap.Col sm="9">
+                                        <Strap.Input type="email" name="email" id="email" placeholder="Email" value={this.state.email} onChange={this.handleChange} />
                                     </Strap.Col>
                                 </Strap.FormGroup>
                                 <Strap.FormGroup row>
