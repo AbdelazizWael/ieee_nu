@@ -28,7 +28,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Move files
         run: |
-          mv demo/* .
+          mv frontend/* .
       
       - name: Commit files # transfer the new html files back into the repository
         run: |
