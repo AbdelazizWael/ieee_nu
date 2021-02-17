@@ -1,21 +1,21 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Setup root structure
+name: Setup Root Directory
 
 # Controls when the action will run. 
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
+  # Triggers the workflow on push or pull request events but only for the release branch
   push:
-    branches: [ deploy-demo-2 ]
+    branches: [ release ]
   pull_request:
-    branches: [ deploy-demo-2 ]
+    branches: [ release ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
+  # This workflow contains a single job called "setup"
   setup:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -26,7 +26,7 @@ jobs:
       - uses: actions/checkout@v2
       
       # Runs a set of commands using the runners shell
-      - name: Copy files
+      - name: Move files
         run: |
           mv demo/* .
       
@@ -40,4 +40,5 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: release
           force: true
