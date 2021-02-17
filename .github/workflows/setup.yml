@@ -31,3 +31,14 @@ jobs:
           echo $PWD
           cp demo/package.json .
           cp demo/yarn.lock .
+      
+      - name: Commit files # transfer the new html files back into the repository
+        run: |
+          git config --local user.name "AbdelazizWael"
+          git add ./docs
+          git commit -m "Updating the repository GitHub html pages in the docs folder"
+      - name: Push changes # push the output folder to your repo
+        uses: ad-m/github-push-action@main
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          force: true
