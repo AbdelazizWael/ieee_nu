@@ -58,10 +58,11 @@ class HistoryAdmin(admin.ModelAdmin):
 @admin.register(Sales)
 class SalesAdmin(admin.ModelAdmin):
     fieldsets = (
-        (None, {'fields': ('product_name',
-                           ('total_count', 'stocked'), ('on_hold', 'ordered', 'sold'))}),
+        (None, {'fields': (('product_name', 'product_price'),
+                           'total_count', ('stocked', 'on_hold', 'ordered', 'sold'))}),
     )
-    list_display = ('product_name', 'total_count',
+    list_display = ('product_name', 'product_price', 'total_count',
                     'stocked', 'on_hold', 'ordered', 'sold')
-    readonly_fields = ('on_hold', 'ordered', 'sold', 'product_name')
+    readonly_fields = ('on_hold', 'ordered', 'sold',
+                       'product_name', 'product_price', 'stocked')
     search_field = ('product_name', )

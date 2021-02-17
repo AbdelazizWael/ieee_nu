@@ -118,6 +118,7 @@ class Sales(models.Model):
     product = models.OneToOneField(
         'Product', on_delete=models.SET_NULL, related_name='sales', null=True)
     product_name = models.CharField(max_length=256, blank=True)
+    product_price = models.FloatField(default=0)
     total_count = models.IntegerField(default=0)
     stocked = models.IntegerField(default=0)
     on_hold = models.IntegerField(default=0)

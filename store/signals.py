@@ -13,15 +13,17 @@ def check_sales_count(sales):
 def create_sales_instance(instance, *args, **kwargs):
     """
     When creating a product instance, create a Sales instance associated
-    with it. If a product is updated, re-assign product_name in case of a any changes.
+    with it. If a product is updated, re-assign product name and price in case of a any changes.
     """
     try:
         if instance.sales:
             s = Sales.objects.get(product=instance)
             s.product_name = instance.name
+            s.product_price = instance.price
             s.save()
     except ObjectDoesNotExist:
-        s = Sales(product=instance, product_name=instance.name)
+        s = Sales(product=instance, product_name=instance.name,
+                  product_price=instance.price)
         s.save()
 
 
@@ -101,3 +103,17 @@ def sort_canceled_order_sales(instance, *args, **kwargs):
     check_sales_count(sales)
 
     sales.save()
+
+
+@receiver(signals.pre_save, sender=Sales)
+def add_to_stocked(instance, *args, **kwargs):
+    """
+    Add any new products to the stocked column automatically.
+    """
+    in_circ = instance.stocked + instance.on_hold + \
+        instance.ordered + instance.sold
+    additions = instance.total_count - in_circ
+    instance.stocked += additions
+
+    # Assert that there are no miscalculations
+    check_sales_count(instance)

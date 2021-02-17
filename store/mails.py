@@ -21,7 +21,6 @@ def send_order_cancelation_mail(user, order):
     subject = '[IEEE NU] Order Canceled'
     to = [user.profile.email]
     template = 'order_cancelation'
-    delivery_date = str(datetime.datetime.date(order.delivery_time))
     context = {
         'full_name': user.profile.full_name,
         'order_id': order.id,
