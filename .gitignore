@@ -119,3 +119,4 @@ GitHub.sublime-settings
 
 # Extra stuff
 node_modules/
+build/
