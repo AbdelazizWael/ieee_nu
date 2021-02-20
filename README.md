@@ -1,30 +1,6 @@
 # READ ME
 
-## Setup for the demo:
-
-Make sure you have [npm](npmjs.com), then go and setup the development server as illustrated below. Now open a new terminal and type the following commands:
-
-- Change into the demo directory:
-
-  ```bash
-  cd demo
-  ```
-
-- Install npm libraries:
-
-  ```bash
-  npm install # if it doesn't work, search for the command for Windows.
-  ```
-
-- Run the front-end server:
-
-  ```bash
-  npm run start
-  ```
-
-The server will run on [http://localhost:3000/](http://localhost:3000/)
-
-## Setup for development:
+## Setup for the back-end:
 
 Make sure you have `Python` >= 3.8, and any api testing tool like [Postman](https://www.postman.com) or [Insomnia](https://insomnia.rest/) (Make sure you install Insomnia Core, not Insomnia Designer). Download this code, or clone the repository. Open a terminal or cmd, go to the project directory, and type the following commands:
 
@@ -71,6 +47,31 @@ python manage.py createsuperuser
 ```
 
 Type your credentials and then run the development server again. Then go to [http://localhost:8000/admin/](http://localhost:8000/admin/) and use the credentials to login.
+
+
+## Setup for the front-end:
+
+Make sure you have [npm](npmjs.com), and the backend server is running. Now open a new terminal and type the following commands:
+
+- Change into the frontend directory:
+
+  ```bash
+  cd frontend
+  ```
+
+- Install npm libraries:
+
+  ```bash
+  npm install
+  ```
+
+- Run the front-end server:
+
+  ```bash
+  npm run start
+  ```
+
+The server will run on [http://localhost:3000/](http://localhost:3000/), make sure the baseUrl in `frontend/src/shared/baseUrl.js` is set to [http://localhost:8000/api/](http://localhost:8000/api/).
 
 ---
 
