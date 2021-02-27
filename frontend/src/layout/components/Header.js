@@ -78,7 +78,7 @@ const Header = (props) => {
                   {props.authState.user.full_name}
                 </NavbarText>
                 <NavItem>
-                  <NavLink href="/logout">Logout</NavLink>
+                  <a href="/logout">Logout</a>
                 </NavItem>
               </Nav>
             ) : (
