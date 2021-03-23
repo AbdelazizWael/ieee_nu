@@ -13,9 +13,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY') or 'abc'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ieee-nu.herokuapp.com']
 
 
 # Application definition
@@ -202,4 +202,4 @@ REST_FRAMEWORK = {
 
 # DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-# django_heroku.settings(locals())
+django_heroku.settings(locals())
