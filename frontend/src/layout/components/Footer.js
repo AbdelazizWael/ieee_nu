@@ -2,102 +2,56 @@ import React from "react";
 import { Col, Container, Jumbotron, Row } from "reactstrap";
 
 import { NavLink } from "react-router-dom";
+import '../../css/master.css'
+
 
 const Footer = (props) => {
   return (
-    <Jumbotron
-      className="mb-0"
-      style={{ paddingBottom: "30px", paddingTop: "40px" }}
-    >
-      <Container>
-        <Row className="justify-content-center">
-          <Col xs={{ size: 4, offset: 0 }} sm={{ size: 2 }}>
-            <h5>Links</h5>
-            <ul className="list-unstyled">
-              <li>
-                <NavLink to="/home">Home</NavLink>
-              </li>
-              <li>
-                <NavLink to="/cart">Cart</NavLink>
-              </li>
-              <li>
-                <NavLink to="/orders">Orders</NavLink>
-              </li>
-              <li>
-                <NavLink to="/history">History</NavLink>
-              </li>
-              {props.authState.user ? (
-                props.authState.user.isStaff === "True" ? (
-                  <li>
-                    <NavLink to="/staff">Staff Panel</NavLink>
-                  </li>
-                ) : null
-              ) : null}
-            </ul>
-          </Col>
-          <Col xs={{ size: 7 }} sm={{ size: 5 }}>
-            <h5>Our Address</h5>
-            <address>
-              26th of July Corridor
-              <br />
-              Al Sheikh Zayed
-              <br />
-              Giza Governorate
-              <br />
-              <i className="fa fa-phone fa-lg"></i>: +852 1234 5678
-              <br />
-              <i className="fa fa-fax fa-lg"></i>: +852 8765 4321
-              <br />
-              <i className="fa fa-envelope fa-lg"></i>:{" "}
-              <a href="mailto:mustafausama@outlook.com">
-                mustafausama@outlook.com
-              </a>
-            </address>
-          </Col>
-          <Col xs={{ size: 12 }} sm={{ size: 4 }} className="align-self-center">
-            <Row>
-              {" "}
-              <iframe
-                title="Geolocation"
-                className="mt-2"
-                src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyAyzbtDMm8MS1VLeeEeA_4MVpYAxr0l8Oc&q=30.0118469,30.9857909&zoom=18&maptype=satellite`}
-                frameBorder="0"
-                width="100%"
-                height="100%"
-              ></iframe>
-            </Row>
-            <div className="text-center">
-              <a
-                className="btn btn-social-icon btn-facebook"
-                href="http://www.facebook.com/profile.php?id="
-              >
-                <i className="fa fa-facebook"></i>
-              </a>
-              <a
-                className="btn btn-social-icon btn-linkedin"
-                href="http://www.linkedin.com/in/"
-              >
-                <i className="fa fa-linkedin"></i>
-              </a>
-              <a
-                className="btn btn-social-icon btn-instagram"
-                href="http://www.instagram.com/"
-              >
-                <i className="fa fa-instagram"></i>
-              </a>
-              <a className="btn btn-social-icon" href="mailto:">
-                <i className="fa fa-envelope-o"></i>
-              </a>
-            </div>
-          </Col>
-        </Row>
-        <div className="row justify-content-center">
-          <div className="col-auto">
-            <p>© Copyright 2020 IEEE NU</p>
-          </div>
-        </div>
-      </Container>
-    </Jumbotron>
+    <>
+    <footer style={{backgroundColor: '#495057'}} className="footer row">
+                <div className="p-4 row col-12">
+                    <div className="col-lg-6 col-md-12">
+                        <h3>About IEEE NU</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
+                            Nesciunt inventore, ab quaerat eligendi numquam exceptur
+                            i porro tenetur, totam veniam deserunt temporibus conseq
+                            uuntur quod exercitationem omnis adipisci asperiores fug
+                            iat eius. Culpa?
+                        </p>
+                    </div>
+                    <div className="row col-lg-4 col-md-9 col-sm-9 links">
+                        <div className="col-6">
+                            <h5>Our Adress</h5>
+                            <p>26th of July Corridor</p>
+                            <p>Al Sheikh Zayed</p>
+                            <p>Giza Governorate</p>
+                        </div>
+                        <div className="col-6">
+                            <h5>Contact Us</h5>
+                            <p><i className="fas fa-phone-alt"></i> +02 1234 567 897</p>
+                            <p><i className="fas fa-fax"></i> +02 1234 567 897</p>
+                        </div>
+                    </div>
+                    <div className="col-lg-2 col-md-3 col-sm-3 mb-4 mb-md-0">
+                        <ul className="list-unstyled links list-group ">
+                            <li><a href="" className="nav-link">About</a></li>
+                            <li><a href="" className="nav-link">Our Mession</a></li>
+                            <li><a href="" className="nav-link">About</a></li>
+                            {props.authState.user ? (
+                                props.authState.user.isStaff === "True" ? (
+                                  <li>
+                                    <NavLink to="/staff">Staff Panel</NavLink>
+                                  </li>
+                                ) : null
+                            ) : null}
+                        </ul>
+                    </div>
+                </div>
+                <div className="col-12 info" style={{backgroundColor: '#212529'}}>
+                    <p>Made with <i className="fas fa-heart"></i> & <i className="fas fa-coffee"> </i> by IEEE NU Team</p>
+                </div>
+            </footer>
+    </>
   );
 };
 

@@ -69,7 +69,7 @@ class Login extends React.Component {
                                     </Strap.Col>
                                 </Strap.FormGroup>
                                 <div className="text-center">
-                                    <Strap.Button color="primary" type="submit">Log In</Strap.Button> {this.props.authState.isLoading ? <Loading /> : null}
+                                    <Strap.Button style={{backgroundColor: '#3888b9', border: 'none'}} type="submit">Log In</Strap.Button> {this.props.authState.isLoading ? <Loading /> : null}
                                     {this.alert(this.props.authState.error)}
                                 </div>
 
@@ -78,7 +78,7 @@ class Login extends React.Component {
                                         ?
                                         <Strap.Row className="my-3">
                                             <Strap.Col xs="12">
-                                                <Strap.Alert color="warning" fade={false}>
+                                                <Strap.Alert color="danger" fade={false}>
                                                     <span className="fa fa-warning"></span> {this.props.location.state.message}
                                                 </Strap.Alert>
                                             </Strap.Col>
