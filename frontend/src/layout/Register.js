@@ -103,7 +103,7 @@ class Login extends React.Component {
                                     </Strap.Col>
                                 </Strap.FormGroup>
                                 <div className="text-center">
-                                    <Strap.Button color="primary" type="submit">Register</Strap.Button> {this.props.authState.isLoading ? <Loading /> : null}
+                                    <Strap.Button style={{backgroundColor: '#3888b9', border: 'none'}} type="submit">Register</Strap.Button> {this.props.authState.isLoading ? <Loading /> : null}
                                     {this.alert(this.props.authState.error)}
                                 </div>
                             </Strap.Form>

@@ -88,18 +88,7 @@ class Home extends Component {
                     }
 
                     <Strap.Row className="my-4">
-                        <form onSubmit={this.handleSubmit} className="w-100">
-                            <Strap.Col sm="8" className="offset-sm-2">
-                                <Strap.InputGroup>
-                                    <Strap.Input type="text" id="q" name="q" placeholder="Search" onChange={this.handleChange} value={this.state.q} />
-                                    <Strap.InputGroupAddon addonType="append">
-                                        <Strap.Button color="primary">
-                                            <span className="fa fa-search"></span> Search
-                                    </Strap.Button>
-                                    </Strap.InputGroupAddon>
-                                </Strap.InputGroup>
-                            </Strap.Col>
-                        </form>
+                        
                     </Strap.Row>
 
                     <Strap.Row>
