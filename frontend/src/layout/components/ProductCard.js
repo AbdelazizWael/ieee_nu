@@ -35,14 +35,14 @@ const ProductCard = (props) => {
                             <div className="discount">
                                 <p>10% Sale</p>
                             </div>
-                            <img className="card-img-top" width="10" src={props.product.image} alt="" width="10" alt={props.product.name}/>
+                            <img className="card-img-top" width="1000" src={props.product.image} alt={props.product.name} />
                         </div>
                         <div className="card-body">
-                            <a href="#" className=""> <h3 className="card-title">{props.product.name}</h3></a>
+                            <a href="#"> <h3 className="card-title">{props.product.name}</h3></a>
                             <Strap.CardSubtitle tag="p" className="text-muted my-1">
                                 Categories: {props.product.categories.join(", ")}
                             </Strap.CardSubtitle>
-                            <h5 className="" style={{color: 'green'}}>{props.product.price}</h5>
+                            <h5 className="" style={{ color: 'green' }}>{props.product.price}</h5>
                             <p className="card-text">{props.product.description}</p>
                         </div>
                     </div>
@@ -53,7 +53,7 @@ const ProductCard = (props) => {
                             :
                             <button className="card-btn-notAuthenticated">Add To Cart <i className="fas fa-shopping-cart" onClick={props.add(props.product)} disabled></i></button>
                     }
-                    
+
                 </div>
             </div>
         </div>
