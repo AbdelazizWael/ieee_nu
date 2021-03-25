@@ -14,7 +14,7 @@ import {
   Container
 } from "reactstrap";
 
-import logo from "../../static/Logo.png";
+import logo from "../../static/IEEE-NU-Logo-White.png";
 import '../../css/master.css'
 
 const Header = (props) => {
