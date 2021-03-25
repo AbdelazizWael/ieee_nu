@@ -27,6 +27,13 @@ const Header = (props) => {
     event.preventDefault();
   }
 
+  var cartCount = 0
+  if (props.cartState.carts.results) {
+    props.cartState.carts.results.forEach(cart => {
+      cartCount += cart.count;
+    })
+  }
+
   return (
     <>
       <nav className="navbar navbar-expand-md navbar-dark justify-content-between" style={{ textAlign: 'center', backgroundColor: '#212529' }}>
@@ -51,18 +58,18 @@ const Header = (props) => {
                   Account
                         </button>
                 <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    {props.authState.isAuthenticated ? (
+                  {props.authState.isAuthenticated ? (
                     <>
-                        <li className="dropdown-item"><span className="fa fa-user"></span>{" "}
+                      <li className="dropdown-item"><span className="fa fa-user"></span>{" "}
                         {props.authState.user.full_name}</li>
                     </>) : (<></>)}
                   <li><a className="dropdown-item" href="/orders">Orders</a></li>
                   <li><a className="dropdown-item" href="/history">History</a></li>
                 </ul>
-                
+
               </div>
               {props.authState.isAuthenticated ? (
-                  <a className="nav-link" href="/logout">Logout</a>
+                <a className="nav-link" href="/logout">Logout</a>
               ) : (
                 <>
                   <li className="nav-item"><a href="/register" className="nav-link">Register</a></li>
@@ -70,12 +77,12 @@ const Header = (props) => {
                 </>
               )}
               {props.authState.isAuthenticated ? (
-                    <>
-                        <li className="nav-item account-text" style={{color: '#fff'}}><span className="fa fa-user"></span>{" "}
-                        {props.authState.user.full_name}</li>
-                    </>) : (<></>)}
+                <>
+                  <li className="nav-item account-text" style={{ color: '#fff' }}><span className="fa fa-user"></span>{" "}
+                    {props.authState.user.full_name}</li>
+                </>) : (<></>)}
               <a className="nav-link" href="/cart" style={{ width: '4rem' }}>
-                <span className="badge badge-pill bg-danger">{props.cartState.carts.count}</span> <span><i className="fas fa-shopping-cart"></i></span>
+                <span className="badge badge-pill bg-danger">{cartCount}</span> <span><i className="fas fa-shopping-cart"></i></span>
               </a>
             </ul>
           </div>
