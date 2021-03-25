@@ -11,9 +11,7 @@ a {
 nav a {
     color: #fff !important;
 }
-hr {
-    width: 35rem
-}
+
 /*Media quiries*/
 @media only screen and (min-width: 767px) {
     .icon {
@@ -98,6 +96,9 @@ hr {
     width: fit-content !important;
 }
 /*Products*/
+.description {
+    min-height: 2.1rem;
+}
 .card-btn {
     /*width: 18rem;*/
     width: 100%;
@@ -123,6 +124,9 @@ hr {
     border-bottom-right-radius: 0 !important;
     /*width:18rem !important; */
 }
+.card a {
+    color: #000;
+}
 .discount {
     background-color: #e64f43;
     color: #fff;
@@ -138,6 +142,19 @@ hr {
     transform-origin: top left;
 
 }
+/*Pagenation*/
+.pagenation {
+    margin-top: 1rem;
+    list-style-type: none;
+}
+.pagenation li {
+    display: inline-block;
+    color: #000 !important;
+}
+.pagenation li a{
+    display: inline-block;
+    color: #000 !important;
+}
 /*Footer*/
 .footer {
     border-top: solid 3px #3888b9 !important;
@@ -149,6 +166,13 @@ hr {
     margin-left: 0 !important;
     /* padding: 1rem; */
 }
+.footer a {
+    color: #fff !important;
+    transition: color 0.3s;
+}
+.footer a:hover {
+    color: #000 !important;
+}
 .info {
     background-color: #3888b9;
     color: #fff;
@@ -157,4 +181,7 @@ hr {
 }
 .info p {
     margin-bottom: 0 !important;
+}
+.btn-social-icon {
+    color: #fff !important;
 }

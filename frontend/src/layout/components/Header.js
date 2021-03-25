@@ -51,24 +51,29 @@ const Header = (props) => {
                   Account
                         </button>
                 <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    {props.authState.isAuthenticated ? (
+                    <>
+                        <li className="dropdown-item"><span className="fa fa-user"></span>{" "}
+                        {props.authState.user.full_name}</li>
+                    </>) : (<></>)}
                   <li><a className="dropdown-item" href="/orders">Orders</a></li>
                   <li><a className="dropdown-item" href="/history">History</a></li>
                 </ul>
+                
               </div>
               {props.authState.isAuthenticated ? (
-                <Nav className="ml-auto" navbar>
-                  <NavbarText>
-                    <span className="fa fa-user"></span>{" "}
-                    {props.authState.user.full_name}
-                  </NavbarText>
-                  <li className="nav-item"><a href="/logout" className="nav-link">Logout</a></li>
-                </Nav>
+                  <a className="nav-link" href="/logout">Logout</a>
               ) : (
                 <>
                   <li className="nav-item"><a href="/register" className="nav-link">Register</a></li>
                   <li className="nav-item"><a href="/login" className="nav-link">Login</a></li>
                 </>
               )}
+              {props.authState.isAuthenticated ? (
+                    <>
+                        <li className="nav-item account-text" style={{color: '#fff'}}><span className="fa fa-user"></span>{" "}
+                        {props.authState.user.full_name}</li>
+                    </>) : (<></>)}
               <a className="nav-link" href="/cart" style={{ width: '4rem' }}>
                 <span className="badge badge-pill bg-danger">{props.cartState.carts.count}</span> <span><i className="fas fa-shopping-cart"></i></span>
               </a>

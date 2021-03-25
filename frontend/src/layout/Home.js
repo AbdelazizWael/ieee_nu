@@ -2,16 +2,27 @@ import React, { Component } from 'react';
 import * as Strap from 'reactstrap';
 import ProductCard from './components/ProductCard';
 import Loading from './components/Loading';
+import Pagination from './components/pagesCounter';
 
 class Home extends Component {
-
     constructor(props) {
         super(props);
 
         this.state = {
             q: '',
+            currentPage: 1, 
+            productsPerPage: 2
         }
     }
+    setCurrentPage = (event) => {
+        this.setState({
+            currentPage: 2
+        })
+        console.log(this.state.currentPage)
+    }
+
+
+    
 
     renderProducts = () => {
         const isLoading = this.props.productState.isLoading;
@@ -30,7 +41,11 @@ class Home extends Component {
             return <h4>{error}</h4>;
         }
         else if (products) {
-            const productsView = products.map(product => {
+            const indexOfLastProduct = this.state.currentPage * this.state.productsPerPage;
+            const indexOfFirstProduct = indexOfLastProduct - this.state.productsPerPage;
+            const currentProduct = products.slice(indexOfFirstProduct, indexOfLastProduct);
+
+            const productsView = currentProduct.map(product => {
                 const prodProps = {
                     product: product,
                     add: add,
@@ -38,16 +53,21 @@ class Home extends Component {
                 }
 
                 return (
-                    <Strap.Col xs="12" sm="6" lg="4">
                         <ProductCard {...prodProps} />
-                    </Strap.Col>
                 );
             });
-
             return (
-                <React.Fragment>
-                    {productsView}
-                </React.Fragment>
+                <>
+                    <React.Fragment>
+                        {productsView}
+                    </React.Fragment>
+                    <Pagination 
+                            productsPerPage = {this.state.productsPerPage}
+                            totalProducts = {products.length}
+                            paginate = {() => this.setCurrentPage()}
+                    />
+                </>
+
             );
         }
     }
@@ -81,7 +101,7 @@ class Home extends Component {
                             null
                             :
                             <div>
-                                <Strap.Alert color="warning" className="mb-3" fade={false}>
+                                <Strap.Alert color="danger" className="mb-3" fade={false}>
                                     <span className="fa fa-warning"></span> You're not logged in yet! Consider logging in to be able to place orders.
                                 </Strap.Alert>
                             </div>

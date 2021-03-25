@@ -5,14 +5,16 @@ const CartCard = (props) => {
     return (
         <div key={props.cart.id}>
             <Strap.Card>
-                <Strap.CardImg top width="100%" src={props.cart.product.image} alt={props.cart.product.name} />
+                <div class="embed-responsive embed-responsive-4by3">
+                    <img className="card-img-top embed-responsive-item" src={props.cart.product.image} alt={props.cart.product.name} />
+                </div>
                 <Strap.CardBody>
                     <Strap.CardTitle tag="h4">{props.cart.product.name}</Strap.CardTitle>
                     <Strap.CardSubtitle tag="p" className="mb-2">
                         <span className="fa fa-money"></span> Product Price: {props.cart.product.price}
                     </Strap.CardSubtitle>
                     <Strap.CardSubtitle tag="p" className="text-muted my-1">
-                        <span className="fa fa-sort-numeric-desc"></span> Count: {props.cart.count}
+                        <span className="fa fa-sort-numeric-desc"></span> Quantity: {props.cart.count}
                     </Strap.CardSubtitle>
                     <Strap.CardText tag="p" className="mb-2">
                         <span className="fa fa-money"></span> Compound Price: {props.cart.compound_price}
