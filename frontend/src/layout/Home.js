@@ -11,14 +11,13 @@ class Home extends Component {
         this.state = {
             q: '',
             currentPage: 1, 
-            productsPerPage: 10
+            productsPerPage: 3
         }
     }
     setCurrentPage = (newPage) => {
         this.setState({
             currentPage: newPage
         })
-        console.log(this.state.currentPage)
     }
 
 
@@ -44,6 +43,7 @@ class Home extends Component {
             const indexOfLastProduct = this.state.currentPage * this.state.productsPerPage;
             const indexOfFirstProduct = indexOfLastProduct - this.state.productsPerPage;
             const currentProduct = products.slice(indexOfFirstProduct, indexOfLastProduct);
+            console.log(products.length)
 
             const productsView = currentProduct.map(product => {
                 const prodProps = {
