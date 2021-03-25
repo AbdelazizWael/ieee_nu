@@ -11,7 +11,7 @@ class Home extends Component {
         this.state = {
             q: '',
             currentPage: 1, 
-            productsPerPage: 2
+            productsPerPage: 10
         }
     }
     setCurrentPage = (newPage) => {
