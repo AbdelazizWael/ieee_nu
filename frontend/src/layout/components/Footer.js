@@ -20,7 +20,7 @@ const Footer = (props) => {
                             <li><a href="/history">History</a></li>
                         </ul>
                     </div>
-                    <div className=" col-lg-4 col-md-4 col-sm-6 links">
+                    <div className=" col-lg-4 col-md-4 col-sm-6 links col-6">
                             <h5>Our Adress</h5>
                             <p>26th of July Corridor <br/>
                             Al Sheikh Zayed<br/>
@@ -28,7 +28,7 @@ const Footer = (props) => {
                             <i className="fas fa-phone-alt"></i> +02 1234 567 897 <br/>
                             <i className="fas fa-fax"></i> +02 1234 567 897</p>
                     </div>
-                    <div className="col-lg-5 col-md-5 col-sm-12 mb-4 mb-md-0">
+                    <div className="col-lg-5 col-md-5 col-sm-12 mb-4 col-6 mb-md-0">
                         <iframe title="Geolocation" class="mt-2" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAyzbtDMm8MS1VLeeEeA_4MVpYAxr0l8Oc&amp;q=30.0118469,30.9857909&amp;zoom=18&amp;maptype=satellite" frameborder="0" width="100%" height="100%"></iframe>
                     </div>
                     <div className="col-12 text-center mt-3">

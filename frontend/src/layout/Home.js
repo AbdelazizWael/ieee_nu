@@ -14,9 +14,9 @@ class Home extends Component {
             productsPerPage: 2
         }
     }
-    setCurrentPage = (event) => {
+    setCurrentPage = (newPage) => {
         this.setState({
-            currentPage: 2
+            currentPage: newPage
         })
         console.log(this.state.currentPage)
     }
@@ -64,7 +64,7 @@ class Home extends Component {
                     <Pagination 
                             productsPerPage = {this.state.productsPerPage}
                             totalProducts = {products.length}
-                            paginate = {() => this.setCurrentPage()}
+                            paginate = {this.setCurrentPage}
                     />
                 </>
 
