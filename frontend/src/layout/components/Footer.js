@@ -11,7 +11,7 @@ const Footer = (props) => {
     <footer style={{backgroundColor: '#495057'}} className="footer row">
         <div className="container">
         <div className="p-4 row col-12">
-                    <div className="col-lg-3 col-md-3 col-sm-6">
+                    <div className="col-lg-3 col-md-3 col-sm-6  col-6">
                         <h3>Links</h3>
                         <ul className="list-unstyled">
                             <li><a href="/home">Home</a></li>
@@ -20,7 +20,7 @@ const Footer = (props) => {
                             <li><a href="/history">History</a></li>
                         </ul>
                     </div>
-                    <div className=" col-lg-4 col-md-4 col-sm-6 links">
+                    <div className=" col-lg-4 col-md-4 col-sm-6 links col-6">
                             <h5>Our Adress</h5>
                             <p>26th of July Corridor <br/>
                             Al Sheikh Zayed<br/>

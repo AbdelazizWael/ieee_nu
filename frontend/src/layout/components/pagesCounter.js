@@ -13,7 +13,7 @@ const PagesCounter = (props) => {
             <ul className='pagenation' style={{textAlign: 'center'}}>
             {pageNumbers.map(page => (
                 <li key={page} className='page-item'>
-                    <a onClick={() => props.paginate(page)} href='#!' className='page-link' style={{color: '#000 !important'}}>
+                    <a onClick={() => props.paginate(page)} href='javascript:void(0)' className='page-link' style={{color: '#000 !important'}}>
                         {page}
                     </a>
                 </li>
