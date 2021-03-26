@@ -82,7 +82,7 @@ const Header = (props) => {
                     {props.authState.user.full_name}</li>
                 </>) : (<></>)}
               <a className="nav-link" href="/cart" style={{ width: '4rem' }}>
-                <span className="badge badge-pill bg-danger">{cartCount}</span> <span><i className="fas fa-shopping-cart"></i></span>
+                <span className="badge badge-pill bg-danger">{cartCount}</span> <span><i className="fa fa-shopping-cart"></i></span>
               </a>
             </ul>
           </div>
