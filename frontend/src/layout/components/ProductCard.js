@@ -3,31 +3,43 @@ import * as Strap from 'reactstrap';
 
 const ProductCard = (props) => {
     return (
-        <div key={props.product.id}>
-            <Strap.Card>
-                <Strap.CardImg top width="100%" src={props.product.image} alt={props.product.name} />
-                <Strap.CardBody>
-                    <Strap.CardTitle tag="h4">{props.product.name}</Strap.CardTitle>
-                    <Strap.CardSubtitle tag="p" className="text-muted my-1">
-                        Categories: {props.product.categories.join(", ")}
-                    </Strap.CardSubtitle>
-                    <Strap.CardText>{props.product.description}</Strap.CardText>
-                    <Strap.CardSubtitle tag="p" className="mb-2">
-                        <span className="fa fa-money"></span> Price: {props.product.price}
-                    </Strap.CardSubtitle>
+        <div key={props.product.id} className="col-lg-4 col-md-6 col-sm-12 mt-4">
+                <div>
+                    <div className="card">
+                        <div>
+                            
+                            <div class="embed-responsive embed-responsive-4by3">
+                                <img className="card-img-top embed-responsive-item" width="1000" src={props.product.image} alt={props.product.name} />
+                            </div>
+                            {
+                                 props.sale ?
+                                    <div className="discount"> 
+                                        <p>{props.sale}</p>
+                                    </div> : <p></p>
+                            }
+                               
+                            
+                            
+                        </div>
+                        <div className="card-body">
+                            <a href="#"> <h3 className="card-title">{props.product.name}</h3></a>
+                            <Strap.CardSubtitle tag="p" className="text-muted my-1">
+                                Categories: {props.product.categories.join(", ")}
+                            </Strap.CardSubtitle>
+                            <h5 className="" style={{ color: 'green' }}>{props.product.price}</h5>
+                            <div className="description">
+                                <p className="card-text">{props.product.description}</p>
+                            </div>
+                        </div>
+                    </div>
                     {
                         props.isAuthenticated
                             ?
-                            <Strap.Button color="success" onClick={props.add(props.product)}>
-                                <span className="fa fa-plus"></span> Add to Cart
-                            </Strap.Button>
+                            <button className="card-btn" onClick={props.add(props.product)}>Add To Cart <i className="fas fa-shopping-cart"></i></button>
                             :
-                            <Strap.Button color="success" onClick={props.add(props.product)} disabled>
-                                <span className="fa fa-plus"></span> Add to Cart
-                            </Strap.Button>
+                            <button className="card-btn" disabled>Add To Cart <i className="fas fa-shopping-cart" onClick={props.add(props.product)}></i></button>
                     }
-                </Strap.CardBody>
-            </Strap.Card>
+                </div>
         </div>
     );
 }
