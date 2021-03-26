@@ -7,12 +7,18 @@ const ProductCard = (props) => {
                 <div>
                     <div className="card">
                         <div>
-                            <div className="discount">
-                                <p>10% Sale</p>
-                            </div>
+                            
                             <div class="embed-responsive embed-responsive-4by3">
                                 <img className="card-img-top embed-responsive-item" width="1000" src={props.product.image} alt={props.product.name} />
                             </div>
+                            {
+                                 props.sale ?
+                                    <div className="discount"> 
+                                        <p>{props.sale}</p>
+                                    </div> : <p></p>
+                            }
+                               
+                            
                             
                         </div>
                         <div className="card-body">
