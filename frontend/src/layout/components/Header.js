@@ -36,7 +36,7 @@ const Header = (props) => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-md navbar-dark justify-content-between" style={{ textAlign: 'center', backgroundColor: '#212529' }}>
+      <nav className="navbar navbar-expand-md navbar-dark justify-content-between fixed-top" style={{ textAlign: 'center', backgroundColor: '#212529', position: 'sticky' }}>
         <div className="container">
           <a className="navbar-brand flex-grow-1" href="/home"><img src={logo} alt="" width="60"></img></a>
           <form className="form flex-grow-1 d-flex" onSubmit={search}>
@@ -55,14 +55,14 @@ const Header = (props) => {
 
               <div className="dropdown account-drop">
                 <button className="btn dropdown-toggle drop-button" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                  Account
+                {props.authState.isAuthenticated ? (
+                    <>
+                      <span className="fa fa-user"></span>{" "}
+                        {props.authState.user.full_name}
+                    </>) : (<>Account</>)}
                         </button>
                 <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  {props.authState.isAuthenticated ? (
-                    <>
-                      <li className="dropdown-item"><span className="fa fa-user"></span>{" "}
-                        {props.authState.user.full_name}</li>
-                    </>) : (<></>)}
+                  
                   <li><a className="dropdown-item" href="/orders">Orders</a></li>
                   <li><a className="dropdown-item" href="/history">History</a></li>
                 </ul>
@@ -82,7 +82,8 @@ const Header = (props) => {
                     {props.authState.user.full_name}</li>
                 </>) : (<></>)}
               <a className="nav-link" href="/cart" style={{ width: '4rem' }}>
-                <span className="badge badge-pill bg-danger">{cartCount}</span> <span><i className="fa fa-shopping-cart"></i></span>
+              {props.authState.isAuthenticated ?<span className="badge badge-pill bg-danger">{cartCount}</span> : <></>}
+                 <span><i className="fa fa-shopping-cart"></i></span>
               </a>
             </ul>
           </div>

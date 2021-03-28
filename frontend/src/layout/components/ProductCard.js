@@ -1,9 +1,11 @@
 import React from 'react';
 import * as Strap from 'reactstrap';
+import '../../css/master.css'
+
 
 const ProductCard = (props) => {
     return (
-        <div key={props.product.id} className="col-lg-4 col-md-6 col-sm-12 mt-4">
+        <div key={props.product.id} className="col-lg-3 col-md-4 col-sm-6 col-6 mt-4 pc">
                 <div>
                     <div className="card">
                         <div>
@@ -26,7 +28,7 @@ const ProductCard = (props) => {
                             <Strap.CardSubtitle tag="p" className="text-muted my-1">
                                 Categories: {props.product.categories.join(", ")}
                             </Strap.CardSubtitle>
-                            <h5 className="" style={{ color: 'green' }}>{props.product.price}</h5>
+                            <h5 className="" style={{ color: 'green' }}>{props.product.price} LE</h5>
                             <div className="description">
                                 <p className="card-text">{props.product.description}</p>
                             </div>

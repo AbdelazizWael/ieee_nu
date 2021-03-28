@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import * as Strap from 'reactstrap';
 import ProductCard from './components/ProductCard';
+import ProductCardsMobile from './components/ProductCardsMobile'
 import Loading from './components/Loading';
 import Pagination from './components/pagesCounter';
+import '../css/master.css'
 
 class Home extends Component {
     constructor(props) {
@@ -11,7 +13,7 @@ class Home extends Component {
         this.state = {
             q: '',
             currentPage: 1, 
-            productsPerPage: 10
+            productsPerPage: 12
         }
     }
     setCurrentPage = (newPage) => {
@@ -53,7 +55,10 @@ class Home extends Component {
                 }
 
                 return (
-                        <ProductCard {...prodProps} />
+                    <>
+                        <ProductCard  {...prodProps} />
+                        {/* <ProductCardsMobile {...prodProps} /> */}
+                    </>
                 );
             });
             return (
