@@ -25,22 +25,22 @@ const Footer = (props) => {
                             <p>26th of July Corridor <br/>
                             Al Sheikh Zayed<br/>
                             Giza Governorate <br/>
-                            <i className="fas fa-phone-alt"></i> +02 1234 567 897 <br/>
-                            <i className="fas fa-fax"></i> +02 1234 567 897</p>
+                            <i className="fas fa-phone-alt"></i> +201007543699<br/>
+                            <i className="fa fa-envelope-o"></i> <a href="mailto:IEEEnu@nu.edu.eg" target="_blank">IEEEnu@nu.edu.eg</a></p>
                     </div>
                     <div className="col-lg-5 col-md-5 col-sm-12 mb-4 mb-md-0">
                         <iframe title="Geolocation" class="mt-2" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAyzbtDMm8MS1VLeeEeA_4MVpYAxr0l8Oc&amp;q=30.0118469,30.9857909&amp;zoom=18&amp;maptype=satellite" frameborder="0" width="100%" height="100%"></iframe>
                     </div>
                     <div className="col-12 text-center mt-3">
-                        <a href="" className="btn btn-social-icon"><i className="fa fa-facebook"></i></a>
-                        <a href="" className="btn btn-social-icon"><i className="fa fa-instagram"></i></a>
-                        <a href="" className="btn btn-social-icon"><i className="fa fa-envelope-o"></i></a>
+                        <a href="https://www.facebook.com/IEEENUSB" target="_blank" className="btn btn-social-icon"><i className="fa fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/ieeenusb/" target="_blank" className="btn btn-social-icon"><i className="fa fa-instagram"></i></a>
+                        <a href="mailto:IEEEnu@nu.edu.eg" target="_blank" className="btn btn-social-icon"><i className="fa fa-envelope-o"></i></a>
                     </div>
                 </div>
         </div>
                 
                 <div className="col-12 info" style={{backgroundColor: '#212529'}}>
-                    <p>© All Rights Reserved For IEEE NU Branch</p>
+                    <p>© Copyright 2021 IEEE Nile Universty Student Branch</p>
                 </div>
             </footer>
     </>

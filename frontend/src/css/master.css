@@ -20,6 +20,12 @@ nav a {
     .account-text {
         display: none;
     }
+    /* .pc {
+        display: block !important;
+    }
+    .mobile {
+        display: none !important;
+    } */
 }
 @media only screen and (max-width: 767px) {
     .txt {
@@ -34,6 +40,12 @@ nav a {
     .account-text {
         display: inline-block;
     }
+    /* .pc {
+        display: none !important;
+    }
+    .mobile {
+        display: block !important;
+    } */
 }
 @media only screen and (max-width: 520px) {
     .input{
@@ -46,13 +58,10 @@ nav a {
         width: 150px;
     }
 }
-@media only screen and (max-width: 991px) {
-    .links {
-        text-align: center;
-    }
-}
+
 /*Nav Bar*/
 .drop-button {
+    margin-top: 2px;
     background: none;
     color: white !important;
     border: none !important;
@@ -107,6 +116,16 @@ nav a {
     color: #fff;
     background-image: linear-gradient(to right, #3888b9 , #0f2c49);
     border-radius: 0 0 5px 5px;
+    padding: 8px;
+}
+.card-btn-mobile {
+    /*width: 18rem;*/
+    width: 100%;
+    border: none;
+    /* background: #3888b9; */
+    color: #fff;
+    background-image: linear-gradient(to right, #3888b9 , #0f2c49);
+    border-radius: 7px;
     padding: 8px;
 }
 .card-btn-notAuthenticated {
