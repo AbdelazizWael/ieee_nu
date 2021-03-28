@@ -225,7 +225,7 @@ LOGGING = {
             'class': 'logging.StreamHandler',
         },
         'console_debug_false': {
-            'level': 'ERROR',
+            'level': 'DEBUG',
             'filters': ['require_debug_false'],
             'class': 'logging.StreamHandler',
         },
