@@ -33,7 +33,7 @@ export const register = (credentials) => (dispatch) => {
 
     return axios.post(baseUrl + prefix + 'register/', credentials)
         .then(res => dispatch(authMessage(res.data.detail)))
-        .catch(error => dispatch(authFailed(error.message)));
+        .catch(error => dispatch(authFailed(error.response.data)));
 }
 
 export const login = (credentials) => (dispatch) => {
@@ -46,7 +46,7 @@ export const login = (credentials) => (dispatch) => {
             getUserData();
             dispatch(authSuccess(token));
         })
-        .catch(error => dispatch(authFailed(error.message)));
+        .catch(error => dispatch(authFailed(error.response.data)));
 }
 
 export const logout = () => (dispatch) => {
