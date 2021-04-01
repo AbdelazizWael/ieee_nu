@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import * as Strap from 'reactstrap';
 import ProductCard from './components/ProductCard';
-import ProductCardsMobile from './components/ProductCardsMobile'
 import Loading from './components/Loading';
 import Pagination from './components/pagesCounter';
 import '../css/master.css'
+import Pop from './components/PopUp'
 
+const img = '../static/Ben10-New.jpg'
 class Home extends Component {
     constructor(props) {
         super(props);
@@ -13,7 +14,9 @@ class Home extends Component {
         this.state = {
             q: '',
             currentPage: 1, 
-            productsPerPage: 12
+            productsPerPage: 12,
+            product: {},
+            modalState: false
         }
     }
     setCurrentPage = (newPage) => {
@@ -21,7 +24,17 @@ class Home extends Component {
             currentPage: newPage
         })
     }
-
+    modal = (product) => {
+        this.setState({
+            product: product,
+            modalState: ! this.state.modalState
+        })
+    }
+    closeModal = () => {
+        this.setState({
+            modalState: !this.state.modalState
+        })
+    }
 
     
 
@@ -56,13 +69,21 @@ class Home extends Component {
 
                 return (
                     <>
-                        <ProductCard  {...prodProps} />
-                        {/* <ProductCardsMobile {...prodProps} /> */}
+                        <ProductCard  {...prodProps} modal = {this.modal} />
                     </>
                 );
             });
+
             return (
                 <>
+                    {
+                        this.state.modalState ? 
+                        <Pop 
+                        product = {this.state.product}
+                        closeModal={this.closeModal}
+                        add = {add}
+                         /> : <></>
+                    }
                     <React.Fragment>
                         {productsView}
                     </React.Fragment>
