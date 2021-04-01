@@ -10,6 +10,8 @@ import History from './History';
 import Staff from './Staff';
 import Login from './Login';
 import Register from './Register';
+import ForgotPassword from './ForgotPassword';
+import ResetFPassword from './ResetFPassword';
 import * as authActions from '../redux/actions/auth';
 import * as productsActions from '../redux/actions/products';
 import * as cartsActions from '../redux/actions/carts';
@@ -58,16 +60,20 @@ class Main extends Component {
     render() {
 
         const pushHome = () => { this.props.history.push("/home") };
+        const pushTo = (addr) => { this.props.history.push(addr) };
 
         const logoutView = () => {
-            cartsActions.deleteCarts();
-            this.props.logout();
+            if (this.props.authState.isAuthenticated) {
+                cartsActions.deleteCarts();
+                this.props.logout();
+            }
             return <Redirect to="/home" />;
         };
 
         const allProps = {
             ...this.props,
             pushHome: pushHome,
+            pushTo: pushTo,
             deleteCarts: cartsActions.deleteCarts,
         }
 
@@ -88,6 +94,14 @@ class Main extends Component {
 
         }
 
+        const mustNotAuth = (component) => {
+            if (!this.props.authState.isAuthenticated) {
+                return component;
+            } else {
+                return <Redirect to="/home" />;
+            }
+        }
+
         return (
             <div>
                 <Header {...allProps} />
@@ -98,8 +112,10 @@ class Main extends Component {
                         <Route exact path="/orders" component={() => mustAuth(<Orders {...allProps} />)} />
                         <Route exact path="/history" component={() => mustAuth(<History {...allProps} />)} />
                         <Route exact path="/staff" component={() => mustStaff(<Staff {...allProps} />)} />
-                        <Route exact path="/login" component={(props) => <Login {...allProps} {...props} />} />
-                        <Route exact path="/register" component={() => <Register {...allProps} />} />
+                        <Route exact path="/login" component={(props) => mustNotAuth(<Login {...allProps} {...props} />)} />
+                        <Route exact path="/register" component={() => mustNotAuth(<Register {...allProps} />)} />
+                        <Route exact path="/password/reset" component={() => mustNotAuth(<ForgotPassword {...allProps} />)} />
+                        <Route exact path="/password/reset/confirm" component={() => mustNotAuth(<ResetFPassword {...allProps} />)} />
                         <Route exact path="/logout" component={logoutView} />
                         <Redirect from="/" to="/home" />
                     </Switch>
