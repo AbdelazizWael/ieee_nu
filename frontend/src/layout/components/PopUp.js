@@ -22,9 +22,6 @@ const PopUp = (props) => {
                         </div>
                     </div>
                 </div>
-                <div style={{textAlign: 'center'}} className="mt-3">
-                        <button className="btn" style={{ borderRadius: '50%', width: '40px', backgroundColor: '#4f4f4f', color: '#fff'}} onClick={props.closeModal}><i class="fas fa-times"></i></button>
-                </div>
             </div>
         </>
     )
