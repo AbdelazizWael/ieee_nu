@@ -6,7 +6,6 @@ import Pagination from './components/pagesCounter';
 import '../css/master.css'
 import Pop from './components/PopUp'
 
-const img = '../static/Ben10-New.jpg'
 class Home extends Component {
     constructor(props) {
         super(props);

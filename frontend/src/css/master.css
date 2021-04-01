@@ -28,12 +28,6 @@ nav a {
         flex: 0 0 75%;
         max-width: 75%;
     }
-    /* .pc {
-        display: block !important;
-    }
-    .mobile {
-        display: none !important;
-    } */
 }
 @media only screen and (max-width: 767px) {
     .txt {
@@ -55,12 +49,6 @@ nav a {
     .card-btn-container {
         text-align: center !important;
     }
-    /* .pc {
-        display: none !important;
-    }
-    .mobile {
-        display: block !important;
-    } */
 }
 @media only screen and (max-width: 992px) {
 }
