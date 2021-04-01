@@ -15,7 +15,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY') or 'abc'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['ieee-nu.herokuapp.com']
+ALLOWED_HOSTS = ['ieeestore.nu.edu.eg', 'ieee-nu.herokuapp.com']
 
 
 # Application definition
@@ -131,7 +131,8 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'build/static')
+    os.path.join(BASE_DIR, 'build/static'),
+    os.path.join(BASE_DIR, 'assets/'),
 ]
 
 MEDIA_URL = '/media/'
@@ -248,4 +249,4 @@ LOGGING = {
     }
 }
 
-django_heroku.settings(locals(), logging=False)
+django_heroku.settings(locals(), logging=False, allowed_hosts=False)
