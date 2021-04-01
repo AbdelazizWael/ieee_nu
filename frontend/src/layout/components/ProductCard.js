@@ -11,7 +11,7 @@ const ProductCard = (props) => {
                         <div>
                             
                             <div class="embed-responsive embed-responsive-4by3">
-                                <img className="card-img-top embed-responsive-item" width="1000" src={props.product.image} alt={props.product.name} />
+                                <img className="card-img-top embed-responsive-item" src={props.product.image} alt={props.product.name} />
                             </div>
                             {
                                  props.sale ?
@@ -29,9 +29,8 @@ const ProductCard = (props) => {
                                 Categories: {props.product.categories.join(", ")}
                             </Strap.CardSubtitle>
                             <h5 className="" style={{ color: 'green' }}>{props.product.price} LE</h5>
-                            <div className="description">
-                                <p className="card-text">{props.product.description}</p>
-                            </div>
+                            <div className=""> 
+                            </div><a href="javascript:void(0)" onClick={()=> props.modal(props.product)}>See more</a>
                         </div>
                     </div>
                     {
