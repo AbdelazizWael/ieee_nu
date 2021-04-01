@@ -29,10 +29,12 @@ class Home extends Component {
             modalState: ! this.state.modalState
         })
     }
-    closeModal = () => {
-        this.setState({
-            modalState: !this.state.modalState
-        })
+    closeModal = (event) => {
+        if(event.target.classList.contains('popScreen')) {
+            this.setState({
+                modalState: !this.state.modalState
+            })
+        }
     }
 
     
