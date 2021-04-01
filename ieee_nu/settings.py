@@ -15,7 +15,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY') or 'abc'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['ieeestore.nu.edu.eg', 'ieee-nu.herokuapp.com']
+ALLOWED_HOSTS = ['ieeestore.nu.edu.eg']
 
 
 # Application definition
