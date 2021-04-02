@@ -197,6 +197,7 @@ nav a {
 }
 .jumbotron {
     padding: 2rem !important;
+    overflow-y: auto;
 }
 .card-btn-pop {
     /*width: 18rem;*/
