@@ -5,9 +5,8 @@ import Loading from './components/Loading';
 import Pagination from './components/pagesCounter';
 import '../css/master.css'
 import Pop from './components/PopUp'
-import { isMobileOnly } from "react-device-detect";
+import { isMobileOnly, isBrowser } from "react-device-detect";
 
-/* For development purposes */
 
 class Home extends Component {
     constructor(props) {
@@ -58,7 +57,6 @@ class Home extends Component {
         const products = this.props.productState.products.results;
         window.onorientationchange = () => {
             if (isMobileOnly) {
-                console.log('mobile')
                 this.setState({
                     modalState: false
                 })
