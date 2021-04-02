@@ -17,6 +17,7 @@ class Login extends React.Component {
                     error[key] = this.props.authState.error[key][0];
                 }
             })
+            console.log(error);
         }
 
         this.state = {

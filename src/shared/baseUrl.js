@@ -1,3 +1,3 @@
-const baseUrl = 'http://localhost:8000/api/'
+const baseUrl = 'http://ieeestore.nu.edu.eg/api/'
 
 export default baseUrl;
