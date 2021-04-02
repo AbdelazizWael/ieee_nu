@@ -49,6 +49,10 @@ nav a {
     .card-btn-container {
         text-align: center !important;
     }
+    .card-title {
+        min-height: 48px;
+        margin-bottom: 0 !important;
+    }
 }
 @media only screen and (max-width: 992px) {
 }
