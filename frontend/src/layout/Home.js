@@ -5,6 +5,7 @@ import Loading from './components/Loading';
 import Pagination from './components/pagesCounter';
 import '../css/master.css'
 import Pop from './components/PopUp'
+import { isMobileOnly } from "react-device-detect";
 
 class Home extends Component {
     constructor(props) {
@@ -24,10 +25,23 @@ class Home extends Component {
         })
     }
     modal = (product) => {
-        this.setState({
-            product: product,
-            modalState: ! this.state.modalState
-        })
+        const modal = <Pop ref="modal"
+            product = {product}
+        />
+        console.log(modal.offsetWidth)
+        if (!isMobileOnly) {
+            this.setState({
+                product: product,
+                modalState: ! this.state.modalState
+            })
+        } else {
+            if (window.screen.orientation.angle == 0) {
+                this.setState({
+                    product: product,
+                    modalState: ! this.state.modalState
+                })
+            }
+        }
     }
     closeModal = (event) => {
         if(event.target.classList.contains('popScreen')) {
@@ -36,6 +50,7 @@ class Home extends Component {
             })
         }
     }
+    
 
     
 
@@ -43,6 +58,12 @@ class Home extends Component {
         const isLoading = this.props.productState.isLoading;
         const error = this.props.productState.error;
         const products = this.props.productState.products.results;
+        window.addEventListener("orientationchange", () => {
+            this.setState({
+                modalState: ! this.state.modalState
+            })
+        })
+        
 
         const add = (product) => (event) => {
             this.props.addCart({ product_id: product.id, count: 1 });
@@ -59,7 +80,7 @@ class Home extends Component {
             const indexOfLastProduct = this.state.currentPage * this.state.productsPerPage;
             const indexOfFirstProduct = indexOfLastProduct - this.state.productsPerPage;
             const currentProduct = products.slice(indexOfFirstProduct, indexOfLastProduct);
-            console.log(products.length)
+            // console.log(products.length)
 
             const productsView = currentProduct.map(product => {
                 const prodProps = {
@@ -74,16 +95,18 @@ class Home extends Component {
                     </>
                 );
             });
-
+            
+            
             return (
                 <>
                     {
                         this.state.modalState ? 
+                        <div className="popScreen" onClick={this.closeModal}>
                         <Pop 
-                        product = {this.state.product}
-                        closeModal={this.closeModal}
-                        add = {add}
-                         /> : <></>
+                            product = {this.state.product}
+                            add = {add}
+                        />
+                        </div> : <></>
                     }
                     <React.Fragment>
                         {productsView}
@@ -94,6 +117,7 @@ class Home extends Component {
                             paginate = {this.setCurrentPage}
                     />
                 </>
+                
 
             );
         }
