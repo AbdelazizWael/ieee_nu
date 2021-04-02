@@ -7,6 +7,8 @@ import '../css/master.css'
 import Pop from './components/PopUp'
 import { isMobileOnly } from "react-device-detect";
 
+/* For development purposes */
+
 class Home extends Component {
     constructor(props) {
         super(props);
@@ -25,10 +27,6 @@ class Home extends Component {
         })
     }
     modal = (product) => {
-        const modal = <Pop ref="modal"
-            product = {product}
-        />
-        console.log(modal.offsetWidth)
         if (!isMobileOnly) {
             this.setState({
                 product: product,
@@ -58,11 +56,14 @@ class Home extends Component {
         const isLoading = this.props.productState.isLoading;
         const error = this.props.productState.error;
         const products = this.props.productState.products.results;
-        window.addEventListener("orientationchange", () => {
-            this.setState({
-                modalState: ! this.state.modalState
-            })
-        })
+        window.onorientationchange = () => {
+            if (isMobileOnly) {
+                console.log('mobile')
+                this.setState({
+                    modalState: false
+                })
+            }
+        };
         
 
         const add = (product) => (event) => {
