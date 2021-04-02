@@ -1,7 +1,6 @@
 /*General Utilities*/
 html, body {
     background: #f4f4f4;
-    line-height: 1.1rem !important;
 }
 input:focus, textarea:focus, select:focus{
     outline: none;
