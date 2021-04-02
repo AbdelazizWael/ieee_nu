@@ -8,6 +8,8 @@ import Pop from './components/PopUp'
 import { isMobileOnly, isBrowser } from "react-device-detect";
 
 
+/* For development purposes */
+
 class Home extends Component {
     constructor(props) {
         super(props);
@@ -39,6 +41,7 @@ class Home extends Component {
                 })
             }
         }
+        console.log(isMobileOnly)
     }
     closeModal = (event) => {
         if(event.target.classList.contains('popScreen')) {
@@ -57,6 +60,7 @@ class Home extends Component {
         const products = this.props.productState.products.results;
         window.onorientationchange = () => {
             if (isMobileOnly) {
+                console.log('mobile')
                 this.setState({
                     modalState: false
                 })

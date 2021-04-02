@@ -5,7 +5,7 @@ import '../../css/master.css'
 
 const ProductCard = (props) => {
     return (
-        <div key={props.product.id} className="col-lg-3 col-md-4 col-sm-6 col-6 mt-4">
+        <div key={props.product.id} className="col-lg-3 col-md-4 col-sm-6 col-6 mt-4" onClick={()=> props.modal(props.product)}>
                 <div>
                     <div className="card">
                         <div>
@@ -24,11 +24,11 @@ const ProductCard = (props) => {
                             
                         </div>
                         <div className="card-body">
-                            <a href="javascript:void(0)" onClick={()=> props.modal(props.product)}> <h5 className="card-title">{props.product.name}</h5></a>
-                            <Strap.CardSubtitle tag="p" className="text-muted my-1" style={{fontSize: '1.09rem'}}>
+                            <a href="javascript:void(0)" onClick={()=> props.modal(props.product)}> <h5 style={{minHeight: '35.2px'}} className="card-title">{props.product.name}</h5></a>
+                            <Strap.CardSubtitle tag="p" className="text-muted my-1" style={{fontSize: '1.23rem', marginBottom: '0.3rem '}}>
                                 Categories: {props.product.categories.join(", ")}
                             </Strap.CardSubtitle>
-                            <h5 className="" style={{ color: 'green' }}>{props.product.price} LE</h5>
+                            <h5 className="" style={{ color: 'green' }}>Price: {props.product.price} LE</h5>
                         </div>
                     </div>
                     {
