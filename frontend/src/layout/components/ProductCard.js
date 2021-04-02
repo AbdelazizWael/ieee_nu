@@ -25,7 +25,7 @@ const ProductCard = (props) => {
                         </div>
                         <div className="card-body">
                             <a href="javascript:void(0)" onClick={()=> props.modal(props.product)}> <h5 style={{minHeight: '35.2px'}} className="card-title">{props.product.name}</h5></a>
-                            <Strap.CardSubtitle tag="p" className="text-muted my-1" style={{fontSize: '1.1rem', marginBottom: '0.3rem '}}>
+                            <Strap.CardSubtitle tag="p" className="text-muted my-1" style={{fontSize: '1.23rem', marginBottom: '0.3rem '}}>
                                 Categories: {props.product.categories.join(", ")}
                             </Strap.CardSubtitle>
                             <h5 className="" style={{ color: 'green' }}>Price: {props.product.price} LE</h5>
