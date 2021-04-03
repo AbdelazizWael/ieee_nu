@@ -125,7 +125,7 @@ nav a {
     padding: 8px;
 }
 .card-title {
-    min-height: 35.2px !important;
+    min-height: 42px !important;
     margin-bottom: 0 !important;
     font-size: 1.1rem !important;
 }
@@ -160,6 +160,9 @@ nav a {
 }
 .card a {
     color: #000;
+}
+.price {
+    margin-top: 5px;
 }
 .discount {
     background-color: #e64f43;
