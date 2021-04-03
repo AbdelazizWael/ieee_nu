@@ -49,10 +49,6 @@ nav a {
     .card-btn-container {
         text-align: center !important;
     }
-    .card-title {
-        min-height: 48px;
-        margin-bottom: 0 !important;
-    }
 }
 @media only screen and (max-width: 992px) {
 }
@@ -128,6 +124,11 @@ nav a {
     border-radius: 0 0 5px 5px;
     padding: 8px;
 }
+.card-title {
+    min-height: 35.2px !important;
+    margin-bottom: 0 !important;
+    font-size: 1.1rem !important;
+}
 .card-btn-mobile {
     /*width: 18rem;*/
     width: 100%;
@@ -137,6 +138,10 @@ nav a {
     background-image: linear-gradient(to right, #3888b9 , #0f2c49);
     border-radius: 7px;
     padding: 8px;
+}
+.categories {
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
 }
 .card-btn-notAuthenticated {
     /*width: 18rem;*/
@@ -170,6 +175,9 @@ nav a {
     left: 0;
     transform-origin: top left;
 
+}
+.card-img-top {
+    cursor: pointer;
 }
 /*Pagenation*/
 .pagenation {
