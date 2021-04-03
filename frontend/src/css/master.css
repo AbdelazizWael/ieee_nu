@@ -125,9 +125,16 @@ nav a {
     padding: 8px;
 }
 .card-title {
-    min-height: 42px !important;
-    margin-bottom: 0 !important;
+    margin-bottom: 0.5rem !important;
     font-size: 1.1rem !important;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.overflowEllipse {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 .card-btn-mobile {
     /*width: 18rem;*/
