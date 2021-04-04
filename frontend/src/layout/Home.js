@@ -104,7 +104,7 @@ class Home extends Component {
                 <>
                     {
                         this.state.modalState ? 
-                        <div className="popScreen" onClick={this.closeModal}>
+                        <div className="popScreen" onClick={this.closeModal} style={{zIndex: 2}}>
                         <Pop 
                             product = {this.state.product}
                             add = {add}

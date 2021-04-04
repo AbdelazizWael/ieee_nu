@@ -9,7 +9,6 @@ const ProductCard = (props) => {
                 <div>
                     <div className="card">
                         <div>
-                            
                             <div class="embed-responsive embed-responsive-4by3">
                                 <img className="card-img-top embed-responsive-item" src={props.product.image} alt={props.product.name} />
                             </div>
@@ -17,18 +16,15 @@ const ProductCard = (props) => {
                                  props.sale ?
                                     <div className="discount"> 
                                         <p>{props.sale}</p>
-                                    </div> : <p></p>
+                                    </div> : <></>
                             }
-                               
-                            
-                            
                         </div>
                         <div className="card-body">
-                            <a href="javascript:void(0)" onClick={()=> props.modal(props.product)}> <h5 style={{minHeight: '35.2px'}} className="card-title">{props.product.name}</h5></a>
-                            <Strap.CardSubtitle tag="p" className="text-muted my-1" style={{fontSize: '1.23rem', marginBottom: '0.3rem '}}>
-                                Categories: {props.product.categories.join(", ")}
+                            <a href="javascript:void(0)" onClick={()=> props.modal(props.product)}> <h5 className="card-title">{props.product.name}</h5></a>
+                            <h5 className="" style={{ color: 'green' }} className="price">Price: {props.product.price} LE</h5>
+                            <Strap.CardSubtitle tag="p" className="text-muted my-1 categories">
+                                Categories: <p className="overflowEllipse">{props.product.categories.join(", ")}</p>
                             </Strap.CardSubtitle>
-                            <h5 className="" style={{ color: 'green' }}>Price: {props.product.price} LE</h5>
                         </div>
                     </div>
                     {

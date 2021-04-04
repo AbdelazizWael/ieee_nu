@@ -1,7 +1,6 @@
 /*General Utilities*/
 html, body {
     background: #f4f4f4;
-    line-height: 1.1rem !important;
 }
 input:focus, textarea:focus, select:focus{
     outline: none;
@@ -49,10 +48,6 @@ nav a {
     }
     .card-btn-container {
         text-align: center !important;
-    }
-    .card-title {
-        min-height: 48px;
-        margin-bottom: 0 !important;
     }
 }
 @media only screen and (max-width: 992px) {
@@ -129,6 +124,18 @@ nav a {
     border-radius: 0 0 5px 5px;
     padding: 8px;
 }
+.card-title {
+    margin-bottom: 0.5rem !important;
+    font-size: 1.1rem !important;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.overflowEllipse {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
 .card-btn-mobile {
     /*width: 18rem;*/
     width: 100%;
@@ -138,6 +145,10 @@ nav a {
     background-image: linear-gradient(to right, #3888b9 , #0f2c49);
     border-radius: 7px;
     padding: 8px;
+}
+.categories {
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
 }
 .card-btn-notAuthenticated {
     /*width: 18rem;*/
@@ -157,6 +168,9 @@ nav a {
 .card a {
     color: #000;
 }
+.price {
+    margin-top: 5px;
+}
 .discount {
     background-color: #e64f43;
     color: #fff;
@@ -171,6 +185,9 @@ nav a {
     left: 0;
     transform-origin: top left;
 
+}
+.card-img-top {
+    cursor: pointer;
 }
 /*Pagenation*/
 .pagenation {
