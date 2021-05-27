@@ -5,11 +5,11 @@ import '../../css/master.css'
 
 const ProductCard = (props) => {
     return (
-        <div key={props.product.id} className="col-lg-3 col-md-4 col-sm-6 col-6 mt-4" onClick={()=> props.modal(props.product)}>
+        <div key={props.product.id} className="col-lg-3 col-md-4 col-sm-6 col-6 mt-4" >
                 <div>
                     <div className="card">
                         <div>
-                            <div class="embed-responsive embed-responsive-4by3">
+                            <div class="embed-responsive embed-responsive-4by3" onClick={()=> props.modal(props.product)}>
                                 <img className="card-img-top embed-responsive-item" src={props.product.image} alt={props.product.name} />
                             </div>
                             {
