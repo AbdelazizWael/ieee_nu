@@ -19,7 +19,7 @@ const Order = (props) => {
                         <p className="mb-0"><b>Count:</b> {cart.count}</p>
                     </Strap.Col>
                     <Strap.Col sm="4">
-                        <p className="mb-0"><b>Price:</b> {cart.compound_price}</p>
+                        <p className="mb-0"><b>Compound Price:</b> {cart.compound_price}</p>
                     </Strap.Col>
                 </Strap.Row>
                 <hr className="m-1 p-0" />
