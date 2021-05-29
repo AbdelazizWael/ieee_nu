@@ -65,14 +65,23 @@ class OrderResource(resources.ModelResource):
         export_order = fields
 
 
+class CartInline(admin.TabularInline):
+    model = Cart
+    can_delete = False
+    fields = ['product', 'count', 'compound_price']
+    readonly_fields = ['product', 'customer', 'count', 'compound_price']
+
+
 @admin.register(Order)
 class OrderAdmin(ExportMixin, admin.ModelAdmin):
     readonly_fields = ('placed', )
 
     fieldsets = (
-        (None, {'fields': ('customer', 'carts', 'full_price', 'delivery_time')}),
+        (None, {'fields': ('customer', 'full_price', 'delivery_time')}),
     )
-    list_display = ('customer', 'full_price', 'delivery_time')
+    list_display = ('id', 'customer', 'full_price', 'delivery_time')
+
+    inlines = [CartInline]
 
     resource_class = OrderResource
 
