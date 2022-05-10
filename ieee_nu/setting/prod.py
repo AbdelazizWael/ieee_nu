@@ -2,7 +2,7 @@ import os
 import django_heroku
 from ieee_nu.settings import BASE_DIR
 
-ALLOWED_HOSTS = ['ieeestore.nu.edu.eg']
+ALLOWED_HOSTS = ['ieeestore.nu.edu.eg', "store.ieeenu.com"]
 
 
 # Application definition
